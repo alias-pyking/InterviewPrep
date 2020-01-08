@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "MSFTJAVA"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - median",
+            "request": "launch",
+            "mainClass": "median",
+            "projectName": "MSFTJAVA"
+        }
+    ]
+}
