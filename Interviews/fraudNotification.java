@@ -5,118 +5,67 @@ import java.text.*;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.regex.*;
+class Solution {
 
-public class Solution {
 
-    // Complete the activityNotifications function below.
-    public static void quicksort(int []array){
-        quicksort(array,0,array.length - 1);
-    }
-    private static void quicksort(int[] array, int left, int right) {
-        if(left >= right) {
-            return;
-        }
-        int pivot = array[(left + right)/2];
-        int index = partition(array,left, right, pivot);
-        quicksort(array,left,index - 1);
-        quicksort(array,index, right);
-    }
-    private static int partition(int[] array, int left, int right, int pivot) {
-        while(left < right) {
-            while(array[left] < pivot) {
-                left++;
-            }
-            while(array[right] > pivot) {
-                right--;
-            }
-            if(left <= right) {
-                swap(array,left, right);
-                left++;
-                right--;
-            }
-        } 
-        return left;
-    }
-    private static void swap(int []array,int left, int right) {
-        int temp = array[left];
-        array[left] = array[right];
-        array[right] = temp;
-    }
     //notification code 
     static int activityNotifications(int[] expenditure, int d) {
-        int i = 0;
-        int j = d;
+        int []countingSortList = new int[201];
+        int medianPostion = -1;
+        int end = d;
         int notifications = 0;
-        int []expd = new int[expenditure.length];
-        for(int idx = 0; idx < expenditure.length; idx++) {
-            expd[idx] = expenditure[idx];
+        int current = 0;
+        if( d % 2 == 0) {
+            medianPostion = d/2;
+        } else {
+            medianPostion = d/2 + 1;
         }
-        double[] medians = getMedians(expenditure,i,j,d);
-        for(int idx = 0; idx < medians.length; idx++) {
-            System.out.print(medians[idx]+",");
-        }
-        System.out.println();
-        i = 0;
-        j = d;
-        for( ; j < expenditure.length; j++) {
-            double median = medians[i];
-            System.out.println(2*median+" , "+expd[j]);
-            if(2*median <= expd[j]) {
-                notifications++;
-            }
-            i++;
-        }
-        return notifications;
-
-    }
-    private static double[] getMedians(int []expenditure, int i, int j, int d) {
-        int []counts = new int[201];
-        for(;i <= j; i++) {
-            counts[expenditure[i]]++;
-        }
-        if(d%2 == 0) {
-            
-        }
-    }
-    private static double getMedian(int []array, int i, int j, int d) {
-        quicksort(array,i,j);
-        if(d % 2 == 0)  {
-            return ((double)array[(i+j)/2] + array[(i+j)/2 + 1]) /2;
-        }
-        else {
-            return array[(i+j)/2];
+        for(int i = 0; i < end; i++) {
+            countingSortList[expenditure[i]]++;
         }
         
+        while (end < expenditure.length) {
+            double median = getMedian(countingSortList, medianPostion,d);
+            if(expenditure[end] >= 2*median) {
+                notifications++;
+            }
+            countingSortList[expenditure[current]]--;
+            countingSortList[expenditure[end]]++;
+            current++;
+            end++;
+        }
+        return notifications;
+    }
+    private static double getMedian(int []array,int medianPostion,int d) {
+        int counter = 0;
+        int left = 0;
+        while(counter < medianPostion) {
+            counter += array[left];
+            left++;
+        }
+        int right = left;
+        left--;
+        // odd
+        if (counter > medianPostion || d % 2 != 0) {
+            return left;
+        } else {
+            while(array[right] == 0){
+                right += 1;
+            }
+            return ((double)left + right) /2;
+        }
     }
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) throws IOException {
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+    public static void main(String[] args){
 
-        String[] nd = scanner.nextLine().split(" ");
-
-        int n = Integer.parseInt(nd[0]);
-
-        int d = Integer.parseInt(nd[1]);
-
-        int[] expenditure = new int[n];
-
-        String[] expenditureItems = scanner.nextLine().split(" ");
-        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-
-        for (int i = 0; i < n; i++) {
-            int expenditureItem = Integer.parseInt(expenditureItems[i]);
-            expenditure[i] = expenditureItem;
+        int n = scanner.nextInt();
+        int d = scanner.nextInt();
+        int expenditure[] = new int[n];
+        for(int i = 0; i < n; i++) {
+            expenditure[i] = scanner.nextInt();
         }
-
-        int result = activityNotifications(expenditure, d);
-
-        bufferedWriter.write(String.valueOf(result));
-        bufferedWriter.newLine();
-
-        bufferedWriter.close();
-
-        scanner.close();
+        System.out.println(activityNotifications(expenditure, d));
     }
 }
