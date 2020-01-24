@@ -10,21 +10,24 @@ class Solution {
 
     // Complete the maximumSum function below.
     static long maximumSum(long[] a, long m) {
-        TreeSet<Long> prefix = new TreeSet<>();
-        long current = 0;
-        long maxSum = 0;
-        int n = a.length;
-        for(int i = 0; i < n; i++) {
-            current = (a[i] % m + current) % m;
-            SortedSet<Long> set = prefix.tailSet(current);
-            Iterator<Long> itr = set.iterator();
-            if(itr.hasNext()) {
-                maxSum = Math.max(maxSum,(current - itr.next() + m)  %m);
+        long []sum = new long[a.length];
+        TreeSet<Long> tree = new TreeSet<>();
+        sum[0] = a[0];
+        sum[0] %= m;
+        tree.add(sum[0]);
+        long result = sum[0];
+        for(int i = 1; i < a.length; i++) {
+            sum[i] = (sum[i -1] + a[i]);
+            sum[i] %= m;
+            Long higher = tree.higher(sum[i]);
+            if (higher == null) {
+                result = Math.max(result,sum[i]);
+            } else{
+                result = Math.max((sum[i] - result + m)%m, result);
             }
-            maxSum = Math.max(maxSum,current);
-            prefix.add(current)
-            
+            tree.add(sum[i]);
         }
+        return result;
     }
 
     private static final Scanner scanner = new Scanner(System.in);
