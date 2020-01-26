@@ -5,38 +5,46 @@ import java.text.*;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.regex.*;
+import java.util.Arrays;
 
 class Solution {
 
     // Complete the minTime function below.
+    static long getItemsProduced(long days, long [] machines,long goal) {
+        long items = 0;
+        for(int i = 0; i < machines.length; i++) {
+            items += days / machines[i];
+        }
+        return items;
+    }
     static long minTime(long[] machines, long goal) {
         long days = 0;
-        long inc = Integer.MAX_VALUE;
-        for(int i =0; i < machines.length; i++)  {
-            if(inc > machines[i]) {
-                inc = machines[i];
+        Arrays.sort(machines);
+        
+        long left = 1;
+        long right = machines[machines.length - 1];
+        while(left < right) {
+            long mid = (left + right) /2;
+            long itemsProduced = getItemsProduced(mid, machines, goal);
+            if (itemsProduced < goal) {
+                left = mid + 1;
+            }
+            else{
+                right = mid;
             }
         }
-        long items = 0;
-        days += inc;
-        while(days <= 20) {
-            items = 0;
-            for(int i = 0; i < machines.length; i++) {
-                items += days / machines[i];
-                if (items >= goal) {
-                    return days;
-                }
-            }
-            if(items >= goal) {
-                break;
-            }
-            days += inc;
-        }
-        return days;
+        return right;
 
     }
-    public static void main(String[] args) throws IOException {
-        long []machines = {4, 5, 6};
-        System.out.println(minTime(machines, 12));
+    private static Scanner scanner =  new Scanner(System.in);
+    public static void main(String[] args){
+        int n = scanner.nextInt();
+        long goal = scanner.nextLong();
+        long []machines = new long[n];
+        for(int i = 0; i < machines.length; i++) {
+            machines[i] = scanner.nextLong();
+        }
+        System.out.println(minTime(machines, goal));
+
     }
 }
