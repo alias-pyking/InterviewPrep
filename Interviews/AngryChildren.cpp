@@ -27,8 +27,11 @@ int mpow(int base, int exp);
 const int N = 1e5+4;
 int main()
 {
-    int i, n, k, j, u, v;
-    cin >> n;
-	return 0; 
+    int i, n, k;
+    cin >> n >> k;
+    int a[n];
+    fo(i,n) cin >> a[i];
+    ll output = 0;
+    
 } 
  

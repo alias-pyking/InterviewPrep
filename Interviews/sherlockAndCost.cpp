@@ -6,7 +6,6 @@
 #include<unordered_map>
 #include<map>
 #include<unordered_set>
-#include<hash_map>
 #include<cmath>
 using namespace std;
 #define gc getchar_unlocked
@@ -27,8 +26,24 @@ int mpow(int base, int exp);
 const int N = 1e5+4;
 int main()
 {
-    int i, n, k, j, u, v;
-    cin >> n;
-	return 0; 
+    int i,n,t;
+    cin >> t;
+    while (t--)
+    {
+        cin >> n;
+        int B[n];
+        fo(i,n) cin >> B[i];
+        int A[N];
+        int dp[n + 1][2];
+        dp[0][1] = 0;
+        dp[0][0] = 0;
+        for( i = 1; i < n; i++) {
+            dp[i][0] = max(dp[i-1][1] + abs(1 - B[i -1]),dp[i-1][0] + abs(1 - 1));
+            dp[i][1] = max(dp[i-1][1]+abs(B[i] - B[i -1]),dp[i-1][0]+abs(B[i] - 1));
+            
+        }
+        cout << max(dp[n-1][0],dp[n-1][1]) <<"\n";
+    }
+    
 } 
  

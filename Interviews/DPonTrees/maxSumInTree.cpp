@@ -25,10 +25,27 @@ using namespace std;
 const int mod = 1000000007;
 int mpow(int base, int exp); 
 const int N = 1e5+4;
+vi g[N];
+int a[N];
+int dp[N];
+void dfs(int node, int parent) {
+    dp[node] = a[node];
+    int mx = 0;
+    for(auto child : g[node]) {
+        if(child == parent) continue;
+        dfs(child,node);
+        mx = max(mx,dp[child]);
+    }
+    dp[node] += mx;
+}
 int main()
 {
     int i, n, k, j, u, v;
     cin >> n;
+    fo(i,n - 1) cin >> u >> v, g[u].pb(v),g[v].pb(u);
+    Fo(i, 1, n + 1) cin >> a[i];
+    dfs(1,0);
+    cout << dp[1] << "\n";
 	return 0; 
 } 
  

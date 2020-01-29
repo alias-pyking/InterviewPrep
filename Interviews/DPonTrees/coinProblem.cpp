@@ -1,13 +1,4 @@
-#include <iostream>
-#include<vector>
-#include<math.h>
-#include<algorithm>
-#include<set>
-#include<unordered_map>
-#include<map>
-#include<unordered_set>
-#include<hash_map>
-#include<cmath>
+#include <bits/stdc++.h>
 using namespace std;
 #define gc getchar_unlocked
 #define fo(i,n) for(i=0;i<n;i++)
@@ -25,10 +16,24 @@ using namespace std;
 const int mod = 1000000007;
 int mpow(int base, int exp); 
 const int N = 1e5+4;
+vi adj[N]
+int dp1[N],dp2[N];
+void dfs(int node, int parent) {
+    int sum1 = 0;
+    int sum2 = 0;
+    for(auto child: adj[node]) {
+        if(child == parent) continue;
+        dfs(child,node);
+        sum1 += dp2[child];
+        sum2 += max(dp1[child],dp2[child])
+    }
+}
 int main()
 {
-    int i, n, k, j, u, v;
+    int n, i, u, v;
     cin >> n;
+    fo(i,n) cin >> u >> v, adj[u].pb(v), adj[v].pb(u);
+    dfs(1,0);
 	return 0; 
 } 
  
