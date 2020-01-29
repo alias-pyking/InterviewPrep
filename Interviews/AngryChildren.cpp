@@ -6,8 +6,8 @@
 #include<unordered_map>
 #include<map>
 #include<unordered_set>
-#include<hash_map>
 #include<cmath>
+#include<limits.h>
 using namespace std;
 #define gc getchar_unlocked
 #define fo(i,n) for(i=0;i<n;i++)
@@ -32,6 +32,31 @@ int main()
     int a[n];
     fo(i,n) cin >> a[i];
     ll output = 0;
-    
+    sort(a,a + n);
+    ll prefixSum[n];
+    ll ans(INT_MAX);
+    ll unfairness = 0;
+    prefixSum[0] = a[0];
+    for( i =1; i < n; i++) {
+        prefixSum[i] = prefixSum[i-1] + a[i];
+    }
+    for(i = 1; i < n; i++) {
+        if(i < k) {
+            unfairness = unfairness + (i*a[i]) - prefixSum[i -1];
+            ans = unfairness;
+        } else
+        {
+            ll temp = (prefixSum[i - 1] - prefixSum[i-k]) - (k - 1) * a[i-k] + (k - 1) *a[i] - (prefixSum[i - 1] - prefixSum[i -k]);
+            if(unfairness - temp > 0) {
+                ans = min(ans,unfairness);
+                unfairness = unfairness - temp;
+            } 
+        }
+        
+
+    }
+    cout << ans << "\n";
+    return 0;
+
 } 
  
