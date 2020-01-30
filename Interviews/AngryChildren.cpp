@@ -46,10 +46,11 @@ int main()
             ans = unfairness;
         } else
         {
-            ll temp = (prefixSum[i - 1] - prefixSum[i-k]) - (k - 1) * a[i-k] + (k - 1) *a[i] - (prefixSum[i - 1] - prefixSum[i -k]);
-            if(unfairness - temp > 0) {
+            ll x = (prefixSum[i - 1] - prefixSum[i-k]) - (k - 1) * a[i-k];
+            ll y = (k - 1) *a[i] - (prefixSum[i - 1] - prefixSum[i -k]);
+            if(unfairness - x  + y> 0) {
                 ans = min(ans,unfairness);
-                unfairness = unfairness - temp;
+                unfairness = unfairness - x  + y;
             } 
         }
         
