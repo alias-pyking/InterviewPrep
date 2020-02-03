@@ -1,9 +1,5 @@
 import java.util.*;
-public class Solution{
-	
-}
-
-public class MyQueue<T> {
+class MyQueue<T> {
 	private Stack<T> stackNewestOnTop = new Stack<>();
 	private Stack<T> stackOldestOnTop = new Stack<>();
 
@@ -14,7 +10,7 @@ public class MyQueue<T> {
 
 	public T peek() {
 		// Get the oldest value
-		// shiftStack();
+		shiftStack();
 		return stackOldestOnTop.peek();
 	}
 
@@ -27,9 +23,7 @@ public class MyQueue<T> {
 	}
 	public T dequeue() {
 		// get the oldest value and remove it 
-		// shiftStack();
+		shiftStack();
 		return stackOldestOnTop.pop();
 	} 
-	
-
 }

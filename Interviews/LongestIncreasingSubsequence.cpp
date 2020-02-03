@@ -1,4 +1,4 @@
-#include <iostream>
+#include<iostream>
 #include<vector>
 #include<math.h>
 #include<algorithm>
@@ -84,7 +84,7 @@ int main()
     int a[n];
     fo(i,n) cin >> a[i];
     int lis = LIS(a,n);
-    cout << lis << "\n";    
+    cout << lis << "\n";     
 	return 0; 
 } 
  
