@@ -24,22 +24,28 @@ using namespace std;
 const int mod = 1000000007;
 int mpow(int base, int exp); 
 const int N = 1e5+4;
+// O((n^2)
+vector<long> riddle(vector<long> arr) {
+    // complete this function
+    vector<long> result;
+    int n = arr.size();
+    for(int i = 0; i < n; i++) {
+        vector<long> vMin;
+        auto it = arr.begin();
+        for( ; it != arr.end() - i; it++) {
+            vector<long> vec;
+            vec.assign(it, it + i + 1);
+            vMin.push_back(*min_element(vec.begin(),vec.end()));
+        }
+        result.push_back(*max_element(vMin.begin(),vMin.end()));
+    }
+    return result;
+
+}
 int main()
 {
     int i, n, k, j;
-    vector<int> vec(5);
-    vec[0] = 1;
-    vec[1] = 2;
-    vec[2] = 3;
-    vec[3] = 4;
-    vec[4] = 5;
-    vector<int> v;
-    auto it = vec.begin();
-    v.assign(it, it + 2);
-    for(auto itr = v.begin(); itr != v.end(); itr++) {
-        cout << *itr << " ";
-    }
-    cout << "\n";
+   
     return 0;
 
 } 
