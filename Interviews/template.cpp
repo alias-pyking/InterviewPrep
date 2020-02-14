@@ -7,6 +7,11 @@
 #include<map>
 #include<unordered_set>
 #include<cmath>
+#include<stack>
+#include<unordered_map>
+#include<queue>
+#include<map>
+#include<cstring>
 using namespace std;
 #define gc getchar_unlocked
 #define fo(i,n) for(i=0;i<n;i++)
