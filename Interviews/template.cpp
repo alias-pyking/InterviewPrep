@@ -30,45 +30,6 @@ using namespace std;
 const int mod = 1000000007;
 int mpow(int base, int exp); 
 const int N = 1e5+4;
-
-
-
-/* Range minimum query segment tree */
-void build_tree(int *arr, int *segment_tree,int i, int s, int e) {
-    if(s > e) {
-        return;
-    }
-    if(s == e) {
-        segment_tree[i] = arr[s];
-        return;
-    }
-    int mid = (s + e)/2;
-    build_tree(arr, segment_tree, 2 * i + 1, s , mid);
-    build_tree(arr, segment_tree, 2 * i + 2, mid + 1, e);
-    int left  = segment_tree[2 * i + 1];
-    int right = segment_tree[2 * i + 2];
-    segment_tree[i] = min(left, right);
-}
-
-int get_range_min(int *arr, int *segment_tree,int i, int s, int e, int qs, int qe) {
-    // No overlap
-    if(qs > e or qe < s) {
-        return INT_MAX;
-    }
-    // Complete overlap
-    if(s >= qs and e <= qe) {
-        return segment_tree[i]; 
-    }
-    // Partial overlap
-    int mid = (s + 2) /2;
-    int leftAns = get_range_min(arr, segment_tree, 2 * i + 1, s, mid, qs, qe);
-    int rightAns = get_range_min(arr, segment_tree, 2 * i + 2, mid + 1, e, qs, qe);
-    return min(leftAns, rightAns);
-}
-
-void update(int *arr, int *segment_tree,int i, int idx, int value)
-/**********************************/
-
 int main()
 {
     int i, n, k, j;
