@@ -57,8 +57,8 @@ int main()
     string u;
     for(i = 0; i < n; i++) {
         t.push(s[i]);
-        minS = get_min(arr);
         arr[s[i] - 'a']--;
+        minS = get_min(arr);
         while (!t.empty() and (t.top() - 'a') <= minS)
         {
             u.pb(t.top());
