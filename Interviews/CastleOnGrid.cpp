@@ -30,11 +30,22 @@ using namespace std;
 const int mod = 1000000007;
 int mpow(int base, int exp); 
 const int N = 1e5+4;
+int minimumMoves(vector<string> grid, int sx, int sy, int gx, int gy, int ans) {
+    
+}
 int main()
 {
     int i, n, k, j;
-    cin >> n;
-
+    cin >> n;   
+    vector<string> grid;
+    fo(i,n){
+        string s;
+        cin >> s;
+        grid.pb(s);
+    }
+    int sx, sy, gx, gy;
+    cin >> sx >> sy >> gx >> gy ;
+    cout << minimumMoves(grid, sx, sy, gx, gy,0) << "\n";
     return 0;
 
 } 

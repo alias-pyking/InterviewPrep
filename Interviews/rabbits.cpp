@@ -32,9 +32,22 @@ int mpow(int base, int exp);
 const int N = 1e5+4;
 int main()
 {
-    int i, n, k, j;
-    cin >> n;
-
+    ll i, n, k, j,t;
+    cin >> t;
+    while (t--)
+    {
+        ll x, y, a, b;
+        cin >> x >> y >> a >> b;
+        ll s = 0;
+        ll yx = y - x;
+        ll ab = a + b;
+        if(yx%ab == 0){
+            cout << yx /ab<<"\n";
+        } else{
+            cout << -1 << "\n";
+        }
+    }
+    
     return 0;
 
 } 

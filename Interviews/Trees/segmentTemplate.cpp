@@ -56,7 +56,7 @@ int get_range_min(int *segment_tree,int i, int s, int e, int qs, int qe) {
         return INT_MAX;
     }
     // Complete overlap
-    if(s >= qs and e <= qe) {
+    if(qs <= s and e <= qe) {
         return segment_tree[i]; 
     }
     // Partial overlap
