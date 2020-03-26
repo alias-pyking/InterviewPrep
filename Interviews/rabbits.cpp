@@ -26,7 +26,7 @@ using namespace std;
 #define S second
 #define clr(x) memset(x, 0, sizeof(x))
 #define init(x, a) memset(x, a, sizeof(x))
- 
+
 const int mod = 1000000007;
 int mpow(int base, int exp); 
 const int N = 1e5+4;
