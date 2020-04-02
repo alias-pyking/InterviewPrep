@@ -19,16 +19,14 @@ class Node:
         self.left = None
         self.right = None
 
-t1 = root = Node(314)
-t2 = t1.left = Node(6)
-t3 = t1.right = Node(6)
+t1 = root = Node(4)
+t2 = t1.left = Node(2)
+t3 = t1.right = Node(7)
 
-t4 = t2.left = Node(271)
-t5 = t2.right = Node(561)
+t4 = t2.left = Node(1)
+t5 = t2.right = Node(3)
 
-t6 = t3.left = Node(2)
-t7 = t3.right = Node(271)
-
+t6 = t3.left = Node(6)
 print(LCA(root,t4, t5).data)
 
         
