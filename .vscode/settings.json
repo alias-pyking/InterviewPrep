@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "C:\\Users\\Shubh\\Anaconda3\\python.exe",
+    "python.pythonPath": "C:\\Python37\\python3.exe",
     "git.ignoreLimitWarning": true,
     "files.associations": {
         "*.tcc": "cpp",
