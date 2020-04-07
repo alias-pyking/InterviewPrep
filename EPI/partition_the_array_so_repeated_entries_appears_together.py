@@ -22,4 +22,3 @@ if __name__ == "__main__":
 	students = [Person(13,'shubh'),Person(15,'sk'),Person(14,'sks'),Person(13,'shubham'),Person(15,'kumar')]
 	groupby_age(students)
 	print(students)
-
