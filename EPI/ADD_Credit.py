@@ -20,7 +20,7 @@ class ClientsCreditsInfo:
 		return False
 	def lookup(self, client_id):
 		credit = self._client_to_credit.get(client_id)
-		return None if credit is None else credit + self._offset
+		return None if credit is None else credit + self._offset 
 	def add_to_all(self,c):
 		self._offset += c
 	def max(self):
