@@ -10,7 +10,6 @@ def generate_power_set(input_set):
 	power_set = []
 	direct_power_set(input_set, power_set)
 	return power_set
-print(generate_power_set([0,1,2]))
 
 
 def permutations(input_string):
@@ -28,6 +27,9 @@ def permutations(input_string):
 				output.append(prefix + first_char + suffix)
 		return output
 	return direct_permutations(input_string)
-print(permutations("ABC"))
+perms = permutations("RELINQUISH")
+for perm in perms:
+	if perm[0] == 'L' or perm[0] == 'N' or perm[0] == 'U' or perm[0] == 'S' or perm[0] == 'H':
+		print(perm)
 
 			
