@@ -25,12 +25,28 @@ using namespace std;
 #define ll long long
 
 int main(){
-	unsigned int n = -1;
-	while (n != 0)
-	{
-		cin >> n;
-		unsigned int d = (int) sqrt(n);
-		cout << (d * d == n ? "yes\n" : "no\n");
+    int n;
+    cin >> n;
+	int a;
+	int has[n + 1];
+	memset(has, 0, sizeof has);
+	int next = n;
+	for (int i = 0; i < n; i++){
+		cin >> a;
+		has[a]++;
+		if(has[next]){
+			cout << next << " ";
+			next = next - 1;
+			for (; next >= 1; next--){
+				if(has[next]){
+					cout << next << " ";
+				} else {
+					break;
+				}
+			}
+			cout << "\n";
+		} else{
+			cout << "\n";
+		}
 	}
-	
 }

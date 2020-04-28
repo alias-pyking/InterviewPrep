@@ -24,13 +24,32 @@
 using namespace std;
 #define ll long long
 
-int main(){
-	unsigned int n = -1;
-	while (n != 0)
-	{
-		cin >> n;
-		unsigned int d = (int) sqrt(n);
-		cout << (d * d == n ? "yes\n" : "no\n");
+int get_sum(int i, int j, int *a){
+	int ans = 0;
+	for (; i <= j; i++){
+		ans += a[i];
 	}
-	
+	return ans;
+}
+
+int main(){
+    int n;
+    cin >> n;
+	int a[n];
+	for (int i = 0; i < n; i++){
+		cin >> a[i];
+	}
+	sort(a, a + n);
+	int num_coins = 1;
+	int my_sum = a[n - 1];
+	for (int i = n - 2; i >= 0; i--){
+		int remaining_sum = get_sum(0, i,a);
+		if(my_sum > remaining_sum){
+			break;
+		} else{
+			my_sum += a[i];
+			num_coins++;
+		}
+	}
+	cout << num_coins;
 }
