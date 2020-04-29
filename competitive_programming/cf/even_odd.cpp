@@ -23,9 +23,22 @@
 #include <assert.h>
 using namespace std;
 #define ll long long
-int n, m;
-int a[1000];
 
 int main(){
-    cin >> n;
+	ll n, k;
+	cin >> n >> k;
+	ll num_odd;
+	if (n % 2 == 0){
+		num_odd = n / 2;
+	} else{
+		num_odd = n / 2 + 1;
+	}
+	if(k <= num_odd){
+		ll ans = 1 + (k - 1) * 2;
+		cout << ans << "\n";
+	} else{
+		ll ans = 2 + (k - 1 - num_odd) * 2;
+		cout << ans << "\n";
+	}
+
 }
