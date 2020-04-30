@@ -25,7 +25,7 @@
 using namespace std;
 #define ll long long
 #define fo(i,n) for (i = 0; i < n; i++)
-int n, m, a, k,i,j,t;
+float n, m, a, k,i,j;
 int arr[1000];
 
 struct point2d{
@@ -36,6 +36,16 @@ struct rectangle{
 	point2d upper;
 };
 int main(){
-	cin >> n;
-    
+	cin >> k;
+	while (k--)
+	{
+		cin >> a;
+		n = 360 / (180 - a);
+		if(n == (int)n){
+			cout << "YES\n";
+		} else{
+			cout << "NO\n";
+		}
+	}
+	
 }

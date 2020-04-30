@@ -25,17 +25,28 @@
 using namespace std;
 #define ll long long
 #define fo(i,n) for (i = 0; i < n; i++)
-int n, m, a, k,i,j,t;
+#define Fo(i,n) for (i = 1; i < n; i++)
+int n, m, a, k,i,j;
 int arr[1000];
 
-struct point2d{
-	double x,y;
+struct point{
+	int x,y;
 };
-struct rectangle{
-	point2d lower;
-	point2d upper;
-};
+
+double get_length(point a, point b){
+	double t1 = pow(b.x - a.x, 2);
+	double t2 = pow(b.y - a.y,2);
+	double length = sqrt(t1 + t2);
+	return length;
+}
+
 int main(){
-	cin >> n;
-    
+	cin >> n >> k;
+	point coordinate[n];
+	fo(i,n) cin >> coordinate[i].x >> coordinate[i].y;
+	double total_length = 0.0;
+	Fo(i,n) total_length += get_length(coordinate[i],coordinate[i - 1]);
+	double time_wasted = total_length/50;
+	time_wasted *= (double)k;
+	cout << setprecision(9) <<time_wasted << "\n";
 }
