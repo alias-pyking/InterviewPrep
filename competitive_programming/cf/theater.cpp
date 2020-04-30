@@ -23,11 +23,11 @@
 #include <assert.h>
 using namespace std;
 #define ll long long
-#define fo(i,n) for (i = 0; i < n; i++)
-int n, m, a, k;
+double n, m,a;
 int arr[1000];
 
 int main(){
-	cin >> n;
-    
+    cin >> n >> m >> a;
+    ll ans = ceil(m/a)*ceil(n/a);
+    cout << ans << "\n";
 }

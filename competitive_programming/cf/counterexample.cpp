@@ -23,22 +23,28 @@
 #include <assert.h>
 using namespace std;
 #define ll long long
+#define fo(i,n) for (i = 0; i < n; i++)
+ll l, r, a, k;
+ll gcd(ll a, ll b)
+{
+  if (b == 0)
+  {
+    return a;
+  }
+  else
+  {
+    return gcd(b, a % b);
+  }
+}
 
 int main(){
-	ll n, k;
-	cin >> n >> k;
-	ll num_odd;
-	if (n % 2 == 0){
-		num_odd = n / 2;
-	} else{
-		num_odd = n / 2 + 1;
+	cin >> l >> r;
+	if(l % 2 != 0){
+		l++;
 	}
-	if(k <= num_odd){
-		ll ans = 1 + (k - 1) * 2;
-		cout << ans << "\n";
+	if(l + 2 > r){
+		cout << -1 << "\n";
 	} else{
-		ll ans = 2 + (k - 1 - num_odd) * 2;
-		cout << ans << "\n";
+		cout<< l << " "<< l + 1 << " "<< l + 2<<"\n";
 	}
-
 }

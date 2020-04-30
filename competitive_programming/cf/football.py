@@ -13,4 +13,3 @@ if __name__ == "__main__":
 			max_score = item[1]
 			winner = item[0]
 	print(winner)
-		
