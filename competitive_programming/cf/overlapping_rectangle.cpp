@@ -36,82 +36,31 @@ struct rectangle{
 	point2d upper;
 };
 int no_overlap = 901212;
-rectangle is_overlap(rectangle first, rectangle second){
-	if((second.lower.x >= first.lower.x and second.lower.x <= first.upper.x) and (second.lower.y >= first.lower.y and second.lower.y <= first.upper.y)){
-		double xl, yl;
-		double xu, yu;
-		xl = second.lower.x;
-		yl = second.lower.y;
-		xu = min(first.upper.x, second.upper.x);
-		yu = min(first.upper.y, second.upper.y);
-		rectangle res;
-		res.lower.x = xl;
-		res.lower.y = yl;
-		res.upper.x = xu;
-		res.upper.y = yu;
-		return res;
+bool is_overlap(rectangle R1, rectangle R2){
+	if((R1.lower.x <= R2.upper.x and R1.upper.x >= R2.lower.x)\
+		and (R1.lower.y <= R2.upper.y and R1.upper.y >= R2.lower.y)){
+		return true;
 	}
-	if ((second.lower.x >= first.lower.x and second.lower.x <= first.upper.x) and (second.upper.y >= first.lower.y and second.upper.y <= first.upper.y)){
-		double xl, yl;
-		double xu, yu;
-		xl = second.lower.x;
-		yl = first.lower.y;
-		xu = min(first.upper.x, second.upper.x);
-		yu = min(first.upper.y, second.upper.y);
-		rectangle res;
-		res.lower.x = xl;
-		res.lower.y = yl;
-		res.upper.x = xu;
-		res.upper.y = yu;
-		return res;
-	}
-	if((second.upper.x >= first.lower.x and second.upper.x <= first.upper.x) and (second.upper.y >= first.lower.y and second.upper.y <= first.upper.y)){
-		double xl, yl;
-		double xu, yu;
-		xl = first.lower.x;
-		yl = max(first.lower.y, second.lower.y);
-		xu = min(first.upper.x, second.upper.x);
-		yu = min(first.upper.y, second.upper.y);
-		rectangle res;
-		res.lower.x = xl;
-		res.lower.y = yl;
-		res.upper.x = xu;
-		res.upper.y = yu;
-		return res;
-
-	}
-	if((second.upper.x >= first.lower.x and second.upper.x <= first.upper.x) and (second.lower.y >= first.lower.y and second.lower.y <= first.upper.y)){
-		double xl, yl;
-		double xu, yu;
-		xl = first.lower.x;
-		yl = second.lower.y;
-		xu = min(first.upper.x, second.upper.x);
-		yu = min(first.upper.y, second.upper.y);
-		rectangle res;
-		res.lower.x = xl;
-		res.lower.y = yl;
-		res.upper.x = xu;
-		res.upper.y = yu;
-		return res;
-	} else{
-		rectangle res;
-		res.lower.x = no_overlap;
-		res.lower.y = no_overlap;
-		res.upper.x = no_overlap;
-		res.upper.y = no_overlap;
-		return res;
-	}
+	return false;
 }
 int main(){
 	cin >> n;
-	rectangle rects[n*2];
-	fo(i, n*2) cin >> rects[i].lower.x >> rects[i].lower.y >> rects[i].upper.x >> rects[i].upper.y;
-	for (i = 0; i < n; i+=2){
-		rectangle r = is_overlap(rects[i], rects[i + 1]);
-		if(r.lower.x == no_overlap){
-			cout << "No Overlap\n";
-		} else{
-			cout << r.lower.x << " " << r.lower.y << " " << r.upper.x << " " << r.upper.y << "\n";
+	while(n--){
+		rectangle R1;
+		rectangle R2;
+		cin >> R1.lower.x >> R1.lower.y >> R1.upper.x >> R1.upper.y;
+		cin >> R2.lower.x >> R2.lower.y >> R2.upper.x >> R2.upper.y;	
+		int xl = max(R1.lower.x, R2.lower.x);
+		int yl = max(R1.lower.y, R2.lower.y);
+		int xu = min(R1.upper.x, R2.upper.x);
+		int yu = min(R1.upper.y, R2.upper.y);
+		if(xl >= xu or yl >= yu){
+			puts("No Overlap");
 		}
+		else{
+			printf("%d %d %d %d\n", xl, yl, xu, yu);
+		}
+		if(n)
+			puts("");
 	}
 }	
