@@ -3,5 +3,8 @@
     "git.ignoreLimitWarning": true,
     "files.associations": {
         "iostream": "cpp"
-    }
+    },
+    "editor.quickSuggestions": true,
+    "codegnuglobal.executable": "C:\\msys64\\usr\\bin\\global.exe"
+    
 }
