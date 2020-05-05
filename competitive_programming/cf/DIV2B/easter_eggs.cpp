@@ -7,18 +7,19 @@ int a[124];
 
 int main(){
 	cin >> n;
-	vector<char> ans;
-	char colors[8] = {'.','R', 'O', 'Y', 'G', 'B', 'I', 'V'};
-	int c_idx = 0;
-	for (i = 1; i <= n; i++){
-		if(i == n){
-			if(colors[c_idx%7])
-		}
-		ans.push_back(colors[c_idx % 7]);
-		c_idx++;
+	char res[n];
+	res[0] = 'R';
+	res[1] = 'O';
+	res[2] = 'Y';
+	res[3] = 'G';
+	res[4] = 'B';
+	res[5] = 'I';
+	res[6] = 'V';
+	for (i = 7; i < n; i++){
+		res[i] = res[i - 4];
 	}
 	for (i = 0; i < n; i++){
-		cout << ans[i];
+		cout << res[i];
 	}
 	cout << "\n";
 }
