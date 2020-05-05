@@ -3,6 +3,7 @@
     "git.ignoreLimitWarning": true,
     "files.associations": {
         "*.tcc": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "iostream": "cpp"
     }
 }
