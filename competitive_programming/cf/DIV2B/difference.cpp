@@ -11,7 +11,7 @@ int dfs1(int u){
 		return 0;
 	vis[u] = 1;
 	int sum = d[u];
-	for(auto v: adjList1[u]){
+	for(int v: adjList1[u]){
 		sum += dfs1(v);
 	}
 	return sum;
@@ -21,7 +21,7 @@ int dfs2(int u){
 		return 0;
 	vis[u] = 1;
 	int sum = d[u];
-	for(auto v: adjList2[u]){
+	for(int v: adjList2[u]){
 		sum += dfs2(v);
 	}
 	return sum;
@@ -31,6 +31,8 @@ int main(){
 	int test_case = 0;
 	while(1){
 		cin >> v >> e;
+		if(v == 0 and e == 0)
+			break;
 		for (int i = 1; i <= v; i++){
 			adjList1[i].clear();
 			adjList2[i].clear();
@@ -45,7 +47,7 @@ int main(){
 			adjList2[y].push_back(x);
 		}
 		cin >> q;
-		printf("Case #%d", ++test_case);
+		printf("Case #%d:\n", ++test_case);
 		while(q--){
 			cin >> x;
 			memset(vis, 0, sizeof vis);
@@ -54,7 +56,7 @@ int main(){
 			int max_d = total_weight - dfs2(x) + d[x];
 			printf("%d\n", max_d - min_d);
 		}
-		
+		puts("");
 	}
 
 }
