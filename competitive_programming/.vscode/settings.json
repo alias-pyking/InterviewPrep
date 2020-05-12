@@ -5,6 +5,6 @@
         "iostream": "cpp"
     },
     "editor.quickSuggestions": true,
-    "codegnuglobal.executable": "C:\\msys64\\usr\\bin\\global.exe"
-    
+    "codegnuglobal.executable": "C:\\msys64\\usr\\bin\\global.exe",
+    "editor.fontSize": 12
 }
