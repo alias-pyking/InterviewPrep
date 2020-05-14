@@ -10,8 +10,6 @@ typedef vector<pair<double, double>> vpd;
 
 #define maxvec(vec) *max_element(vec.begin(), vec.end())
 #define minvec(vec) *min_element(vec.begin(), vec.end())
-#define vi(n,name) vector<int> name(n)
-#define vl(n, name) vector<ll> name(n)
 #define fo(i, n) for (int i = 0; i < n; i++)
 #define Fo(i, n) for (int i = 1; i <= n; i++)
 #define REP(i, a, b) for (int i = a; i <= b; i++)
@@ -22,27 +20,32 @@ typedef vector<pair<double, double>> vpd;
 #define OJ freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
 const int N = 1e5 + 24;
 const int mod = 1e9 + 7;
-double vp, vd, t, f, c, dp;
+int n, m;
+
 int main(){
 	OJ
-	int  q;
-	cin >> vp >> vd >> t >> f >> c;
-	dp = t * vp;
+	int t, q;
+	cin >> n;
+	vector<vi> a(n, vi(2));
+	fo(i, n) cin >> a[i][0] >> a[i][1];
 	int ans = 0;
-	if(vd < vp){
-		puts("0");
-		return 0;
-	}
-	while(dp < c){
-		double td = dp/(vd - vp);
-		dp = dp + td * vp;
-		if (dp >= c)
-			break;
-		double t_back = dp/vd + f;
-		dp = dp + t_back * vp;
-		ans++;
+	int last_x = a[0][0] - a[0][1];
+	fo(i, n){
+		int x = a[i][0], h = a[i][1];
+		if(i == 0){
+			ans++;
+		} else {
+			if(x - h > last_x and x - h > a[i-1][0]){
+				ans++;
+				last_x = x - h;
+			} else if(i < n - 1 and x + h > last_x and x + h < a[i + 1][0]){
+				ans++;
+				last_x = x + h;
+			} else if(i == n - 1){
+				ans++;
+			}
+		}
 	}
 	print(ans);
 }
-
 

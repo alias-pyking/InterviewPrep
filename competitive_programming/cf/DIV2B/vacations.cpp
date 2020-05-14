@@ -10,7 +10,6 @@ typedef vector<pair<double, double>> vpd;
 
 #define maxvec(vec) *max_element(vec.begin(), vec.end())
 #define minvec(vec) *min_element(vec.begin(), vec.end())
-#define vi(n,name) vector<int> name(n)
 #define vl(n, name) vector<ll> name(n)
 #define fo(i, n) for (int i = 0; i < n; i++)
 #define Fo(i, n) for (int i = 1; i <= n; i++)
@@ -22,27 +21,28 @@ typedef vector<pair<double, double>> vpd;
 #define OJ freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
 const int N = 1e5 + 24;
 const int mod = 1e9 + 7;
-double vp, vd, t, f, c, dp;
+int n, m;
 int main(){
-	OJ
-	int  q;
-	cin >> vp >> vd >> t >> f >> c;
-	dp = t * vp;
-	int ans = 0;
-	if(vd < vp){
-		puts("0");
-		return 0;
+	// OJ
+	int t, q;
+	cin >> n;
+	int a[n];
+	fo(i, n) cin >> a[i];
+	vector<vi> dp(n, vi(3));
+	if(a[0] == 1 or a[0] == 3)
+		dp[0][1]++;
+	if(a[0] == 2 or a[0] == 3)
+		dp[0][2]++;
+	REP(i,1,n - 1){
+		dp[i][0] = max(dp[i - 1][0], max(dp[i - 1][1], dp[i - 1][2]));
+		dp[i][1] = max(dp[i - 1][0], dp[i - 1][2]);
+		if(a[i] == 1 or a[i] == 3)
+			dp[i][1]++;
+		dp[i][2] = max(dp[i - 1][0], dp[i - 1][1]);
+		if(a[i] == 2 or a[i] == 3)
+			dp[i][2]++;
 	}
-	while(dp < c){
-		double td = dp/(vd - vp);
-		dp = dp + td * vp;
-		if (dp >= c)
-			break;
-		double t_back = dp/vd + f;
-		dp = dp + t_back * vp;
-		ans++;
-	}
-	print(ans);
-}
+	print(n - max(dp[n - 1][0], max(dp[n - 1][1], dp[n - 1][2])));
 
+}
 

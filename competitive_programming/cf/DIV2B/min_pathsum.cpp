@@ -22,27 +22,26 @@ typedef vector<pair<double, double>> vpd;
 #define OJ freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
 const int N = 1e5 + 24;
 const int mod = 1e9 + 7;
-double vp, vd, t, f, c, dp;
+int n, m;
+
 int main(){
 	OJ
-	int  q;
-	cin >> vp >> vd >> t >> f >> c;
-	dp = t * vp;
-	int ans = 0;
-	if(vd < vp){
-		puts("0");
-		return 0;
+	int t, q;
+	cin >> n >> m;
+	int a[n][m];
+	fo(i, n){
+		fo(j, m)
+			cin >> a[i][j];
 	}
-	while(dp < c){
-		double td = dp/(vd - vp);
-		dp = dp + td * vp;
-		if (dp >= c)
-			break;
-		double t_back = dp/vd + f;
-		dp = dp + t_back * vp;
-		ans++;
+	int dp[n][m];
+	dp[0][0] = a[0][0];
+	REP(i, 1, m - 1) dp[0][i] = a[0][i] + dp[0][i - 1];
+	REP(i, 1, n - 1) dp[i][0] = a[i][0] + dp[i - 1][0];
+	REP(i,1, n - 1){
+		REP(j,1,m - 1){
+			dp[i][j] = a[i][j] +  min(dp[i - 1][j], dp[i][j - 1]);
+		}
 	}
-	print(ans);
+	print(dp[n - 1][m - 1]);
 }
-
 
