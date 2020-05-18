@@ -20,38 +20,22 @@ typedef vector<pair<double, double>> vpd;
 #define OJ freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
 const int N = 1e5 + 24;
 const int mod = 1e9 + 7;
-int n;
-struct point2d{
-	double x,y;
-};
-struct rectangle{
-	point2d lower;
-	point2d upper;
-};
-void intersecting_lines(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4) {
-	double A1 = (y2 - y1);
-	double B1 = (x1 - x2);
-	double C1 = x1* y2 - x2 * y1;
-	double A2 = (y4 - y3);
-	double B2 = (x3 - x4);
-	double C2 = x3 * y4 - x4 * y3;
-	double det = (A1 * B2) - (A2 * B1);
-	if(det == 0){
-		if(A1*x3 + B1*y3 - C1 == 0){
-			printf("LINE\n");
-		} else {
-			printf("NONE\n");
-		}
-		
-	} else {
-		double x = (B2*C1 - B1*C2) / det;
-		double y = (A1 * C2 - A2 * C1) / det;
-		printf("POINT %.2f %.2f\n", x, y);
-	}
-}
+int n, m;
 int main(){
-	#ifndef ONLINE_JUDGE	
+	// #ifndef ONLINE_JUDGE	
 	OJ
-	#endif
+	// #endif
+	int t, q;
+	cin >> n;
+	int a[n];
+	fo(i, n) cin >> a[i];
+	sort(a, a + n);
+	int ans = INT_MAX;
+	int x;
+	fo(i, n){
+		x = upper_bound(a, a + n, a[i] * 2) - a;
+		ans = min(ans, i + n - x);
+	}
+	print(ans);
 }
 

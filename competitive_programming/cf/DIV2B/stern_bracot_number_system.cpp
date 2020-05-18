@@ -20,38 +20,33 @@ typedef vector<pair<double, double>> vpd;
 #define OJ freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
 const int N = 1e5 + 24;
 const int mod = 1e9 + 7;
-int n;
-struct point2d{
-	double x,y;
-};
-struct rectangle{
-	point2d lower;
-	point2d upper;
-};
-void intersecting_lines(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4) {
-	double A1 = (y2 - y1);
-	double B1 = (x1 - x2);
-	double C1 = x1* y2 - x2 * y1;
-	double A2 = (y4 - y3);
-	double B2 = (x3 - x4);
-	double C2 = x3 * y4 - x4 * y3;
-	double det = (A1 * B2) - (A2 * B1);
-	if(det == 0){
-		if(A1*x3 + B1*y3 - C1 == 0){
-			printf("LINE\n");
-		} else {
-			printf("NONE\n");
-		}
-		
+int n, m;
+
+void find(int x, int y, int a = 0, int b = 1, int  c = 1,int d = 0) {
+	int m = a + c, n = b + d;
+	if(x == m and n == y)
+		return;
+	if(x*n < y*m) {
+		printf("L");
+		find(x, y, a, b, m, n);
 	} else {
-		double x = (B2*C1 - B1*C2) / det;
-		double y = (A1 * C2 - A2 * C1) / det;
-		printf("POINT %.2f %.2f\n", x, y);
+		printf("R");
+		find(x, y, m, n, c, d);
 	}
 }
+
 int main(){
 	#ifndef ONLINE_JUDGE	
 	OJ
 	#endif
+	int t, q;
+	int x,y;
+	while(1){
+		cin >> x >> y;
+		if(x == 1 and y == 1)
+			return 0;
+		find(x, y);
+		cout << '\n';
+	}
 }
 

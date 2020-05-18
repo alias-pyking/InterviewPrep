@@ -24,10 +24,9 @@ def find_minimum_subarray_sequential(paragraph, keywords):
 	return result
 
 if __name__ == "__main__":
-	paragraph = "Thor is god of thunder he can manupulate the thunder and weather with his powers\
-				he power to talk in any language he wants";
+	paragraph = "1 2 2 2 2 1 3 3 3 3 3 3 3 2";
 	paragraph = paragraph.split(' ')
-	keywords = "thunder and weather";
+	keywords = "1 2 3";
 	keywords = keywords.split(' ')
 	print(find_minimum_subarray_sequential(paragraph, keywords))
 

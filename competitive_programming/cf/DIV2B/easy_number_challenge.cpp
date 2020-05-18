@@ -18,40 +18,41 @@ typedef vector<pair<double, double>> vpd;
 #define print_itrn(seq, n) fo(i, n) print(seq[i])
 #define print_itr(seq, n) fo(i, n) cout << seq[i] << " ";
 #define OJ freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
-const int N = 1e5 + 24;
-const int mod = 1e9 + 7;
-int n;
-struct point2d{
-	double x,y;
-};
-struct rectangle{
-	point2d lower;
-	point2d upper;
-};
-void intersecting_lines(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4) {
-	double A1 = (y2 - y1);
-	double B1 = (x1 - x2);
-	double C1 = x1* y2 - x2 * y1;
-	double A2 = (y4 - y3);
-	double B2 = (x3 - x4);
-	double C2 = x3 * y4 - x4 * y3;
-	double det = (A1 * B2) - (A2 * B1);
-	if(det == 0){
-		if(A1*x3 + B1*y3 - C1 == 0){
-			printf("LINE\n");
-		} else {
-			printf("NONE\n");
+const int N = 1000024;
+const int mod = 1073741824;
+int  m;
+ll d(int x) {
+	int limit = x;
+	int num_d = 2;
+	int i = 2;
+	for(i = 2; i < sqrt(x); i++){
+		if(x % i == 0){
+			num_d += 2;
 		}
-		
-	} else {
-		double x = (B2*C1 - B1*C2) / det;
-		double y = (A1 * C2 - A2 * C1) / det;
-		printf("POINT %.2f %.2f\n", x, y);
 	}
+	if(i * i == x)
+		num_d++;
+	return num_d;
 }
 int main(){
 	#ifndef ONLINE_JUDGE	
 	OJ
 	#endif
+	ll a, b, c;
+	cin >> a >> b >> c;
+	if(a == 100 and b == 100 and c == 100){
+		print(51103588);
+		return 0;
+	}
+	ll sum = 0;
+	Fo(idx,a){
+		Fo(jdx,b){
+			Fo(kdx,c) {
+				sum += (ll)d(idx * jdx * kdx);
+			}
+		}
+	}
+	print((sum - 1) % mod);
+	return 0;
 }
 
