@@ -20,47 +20,67 @@ typedef vector<pair<double, double>> vpd;
 #define OJ freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
 const int N = 1e5 + 24;
 const int mod = 1e9 + 7;
-ll n, m, x, y;
-vl graph[150024];
-bool vist[150024];
-void dfs(int u, int cnt_v, int cnt_e){
-	vist[u] = 1;
-	cnt_v++;
-	// printf("%d %d\n", u, graph[u].size());
-	cnt_e += graph[u].size();
-	printf("v: %d e: %d\n", cnt_v, cnt_e);
-	for(auto v: graph[u]) {
-		if(!vist[v])
-			dfs(v, cnt_v, cnt_e);
+int n, m;
+
+struct Edge{
+	int u, v, w;
+	bool operator <(Edge const& other){
+		return w < other.w;
+	}
+};
+
+vi parent, _rank;
+void make_set(int v){
+	parent[v] = v;
+	_rank[v] = 0;
+}
+int find_set(int v){
+	if(v == parent[v])
+		return v;
+	return parent[v] = find_set(parent[v]);
+}
+void union_set(int a, int b){
+	a = find_set(a);
+	b = find_set(b);
+	if(a != b){
+		if(_rank[a] < _rank[b]){
+			swap(a, b);
+		}
+		parent[b] = a;
+		if(_rank[a] == _rank[b]){
+			_rank[a]++;
+		}
 	}
 }
+vector<Edge> edges;
+vector<Edge> result;
 int main(){
 	#ifndef ONLINE_JUDGE	
 	OJ
 	#endif
 	int t, q;
 	cin >> n >> m;
+	int cost = 0;
+	_rank.resize(n);
+	parent.resize(n);
+	Fo(i, n) make_set(i);
 	fo(i, m){
-		int u, v;
-		cin >> u >> v;
-		graph[u].push_back(v);
-		graph[v].push_back(u);
+		int u, v, w;
+		cin >> u >> v >> w;
+		Edge e;
+		e.u = u;
+		e.v = v;
+		e.w = w;
+		edges.push_back(e);
 	}
-	memset(vist, 0, sizeof(vist));
-	for(ll u = 1; u <= n; u++){
-		if(!vist[u]){
-			int cnt_v = 0, cnt_e = 0;
-			dfs(u, cnt_v, cnt_e);
-			printf("v: %d e: %d\n", cnt_v, cnt_e);
-			int c = cnt_v * (cnt_v - 1) / 2;
-			// checking if its a clique
-			if (cnt_e != c){
-				puts("NO");
-				return 0;
-			}
+	sort(edges.begin(), edges.end());
+	for (auto e: edges){
+		if(find_set(e.u) != find_set(e.v)){
+			cost += e.w;
+			result.push_back(e);
+			union_set(e.u, e.v);
 		}
 	}
-	print("YES");
-	return 0;
+	print(cost);
 }
 

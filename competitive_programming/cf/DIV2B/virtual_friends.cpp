@@ -20,47 +20,58 @@ typedef vector<pair<double, double>> vpd;
 #define OJ freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
 const int N = 1e5 + 24;
 const int mod = 1e9 + 7;
-ll n, m, x, y;
-vl graph[150024];
-bool vist[150024];
-void dfs(int u, int cnt_v, int cnt_e){
-	vist[u] = 1;
-	cnt_v++;
-	// printf("%d %d\n", u, graph[u].size());
-	cnt_e += graph[u].size();
-	printf("v: %d e: %d\n", cnt_v, cnt_e);
-	for(auto v: graph[u]) {
-		if(!vist[v])
-			dfs(v, cnt_v, cnt_e);
+int n, m;
+map<string, string> parent;
+map<string, int> _rank;
+void make_set(string name){
+	parent[name] = name;
+	_rank[name] = 1;
+}
+string find_set(string name){
+	if(name == parent[name]){
+		return name;
 	}
+	return parent[name] = find_set(parent[name]);
+}
+void link(string u, string v){
+	if(_rank[u] > _rank[v]) {
+		swap(u, v);
+	}
+	parent[u] = v;
+	if(_rank[u] <= _rank[v]){
+		_rank[v] += _rank[u];
+	}
+}
+int union_set(string u, string v){
+	u = find_set(u);
+	v = find_set(v);
+	if(u != v)
+		link(u, v);
+	return max(_rank[u], _rank[v]);
 }
 int main(){
 	#ifndef ONLINE_JUDGE	
 	OJ
 	#endif
 	int t, q;
-	cin >> n >> m;
-	fo(i, m){
-		int u, v;
-		cin >> u >> v;
-		graph[u].push_back(v);
-		graph[v].push_back(u);
-	}
-	memset(vist, 0, sizeof(vist));
-	for(ll u = 1; u <= n; u++){
-		if(!vist[u]){
-			int cnt_v = 0, cnt_e = 0;
-			dfs(u, cnt_v, cnt_e);
-			printf("v: %d e: %d\n", cnt_v, cnt_e);
-			int c = cnt_v * (cnt_v - 1) / 2;
-			// checking if its a clique
-			if (cnt_e != c){
-				puts("NO");
-				return 0;
+	cin >> t;
+	while(t--){
+		parent.clear();
+		_rank.clear();
+		cin >> n;
+		fo(i, n) {
+			int size = 0;
+			string u, v;
+			cin >> u >> v;
+			if(parent.count(u) == 0){
+				make_set(u);
 			}
+			if(parent.count(v) == 0) {
+				make_set(v);
+			}
+			print(union_set(u, v));
 		}
+
 	}
-	print("YES");
-	return 0;
 }
 
