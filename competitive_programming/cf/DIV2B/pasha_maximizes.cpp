@@ -15,8 +15,6 @@ typedef vector<pair<double, double>> vpd;
 #define REP(i, a, b) for (int i = a; i <= b; i++)
 #define SQ(a) (a)*(a)
 #define print(var) cout << var << "\n";
-#define print_itrn(seq, n) fo(i, n) print(seq[i])
-#define print_itr(seq, n) fo(i, n) cout << seq[i];
 #define OJ freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
 const int N = 1e5 + 24;
 const int mod = 1e9 + 7;
@@ -27,47 +25,33 @@ int main(){
 	OJ
 	#endif
 	int t, q;
-	string s;
-	cin >> s;
-	n = s.length();
-	int ones = 0;
-	fo(i, n){
-		if(s[i] == '1'){
-			s[i] = '_';
-			ones++;
-		}
-	}
-	string result;
+	string str;
+	int k;
+	cin >> str >> k;
+	n = str.length();
+	vi num;
+	fo(i, n) num.push_back(str[i] - '0');
 	int i = 0;
-	while (i < n){
-		if (s[i] != '2' and s[i] != '_'){
-			result.push_back('0');
-		} else if(s[i] == '2'){
-			fo(j,ones){
-				result.push_back('1');
+	while(i < n){
+		int j = i + 1;
+		int next_max = -1;
+		int pos = -1;
+		while(j <= i + k and j < n){
+			if(next_max < num[j]){
+				next_max = num[j];
+				pos = j;
 			}
-			while(i < n){
-				if(s[i] != '_'){
-					result.push_back(s[i]);
-				}
-				i++;
+			j++;
+		}
+		if(next_max > num[i]){
+			while(pos > i and k > 0){
+				swap(num[pos], num[pos - 1]);
+				pos--, k--;
 			}
-			break;
 		}
 		i++;
 	}
-	int flag = 1;
-	fo(i, n){
-		if(s[i] == '2'){
-			flag = 0;
-			break;
-		}
-	}
-	if(flag){
-		fo(i, ones){
-			result.push_back('1');
-		}
-	}
-	print(result);
+	fo(i, n) cout << num[i];
+
 }
 

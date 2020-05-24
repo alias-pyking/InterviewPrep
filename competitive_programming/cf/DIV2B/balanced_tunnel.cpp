@@ -16,58 +16,37 @@ typedef vector<pair<double, double>> vpd;
 #define SQ(a) (a)*(a)
 #define print(var) cout << var << "\n";
 #define print_itrn(seq, n) fo(i, n) print(seq[i])
-#define print_itr(seq, n) fo(i, n) cout << seq[i];
+#define print_itr(seq, n) fo(i, n) cout << seq[i] << " ";
 #define OJ freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
 const int N = 1e5 + 24;
 const int mod = 1e9 + 7;
 int n, m;
-
+int a[N];
+int b[N];
 int main(){
 	#ifndef ONLINE_JUDGE	
 	OJ
 	#endif
 	int t, q;
-	string s;
-	cin >> s;
-	n = s.length();
-	int ones = 0;
+	cin >> n;
+	fo(i, n) cin >> a[i], --a[i];
+	fo(i, n) cin >> b[i], --b[i];
+	int pos[n];
 	fo(i, n){
-		if(s[i] == '1'){
-			s[i] = '_';
-			ones++;
-		}
+		pos[b[i]] = i;
 	}
-	string result;
-	int i = 0;
-	while (i < n){
-		if (s[i] != '2' and s[i] != '_'){
-			result.push_back('0');
-		} else if(s[i] == '2'){
-			fo(j,ones){
-				result.push_back('1');
-			}
-			while(i < n){
-				if(s[i] != '_'){
-					result.push_back(s[i]);
-				}
-				i++;
-			}
-			break;
-		}
-		i++;
-	}
-	int flag = 1;
+	int c[n];
 	fo(i, n){
-		if(s[i] == '2'){
-			flag = 0;
-			break;
-		}
+		c[i] = pos[a[i]];
 	}
-	if(flag){
-		fo(i, ones){
-			result.push_back('1');
+	int max_c = -1;
+	int fined = 0;
+	fo(i, n){
+		if(c[i] < max_c){
+			fined++;
 		}
+		max_c = max(max_c, c[i]);
 	}
-	print(result);
+	print(fined);
 }
 

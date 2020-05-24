@@ -16,7 +16,7 @@ typedef vector<pair<double, double>> vpd;
 #define SQ(a) (a)*(a)
 #define print(var) cout << var << "\n";
 #define print_itrn(seq, n) fo(i, n) print(seq[i])
-#define print_itr(seq, n) fo(i, n) cout << seq[i];
+#define print_itr(seq, n) fo(i, n) cout << seq[i] << " ";
 #define OJ freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
 const int N = 1e5 + 24;
 const int mod = 1e9 + 7;
@@ -27,45 +27,21 @@ int main(){
 	OJ
 	#endif
 	int t, q;
-	string s;
-	cin >> s;
-	n = s.length();
-	int ones = 0;
-	fo(i, n){
-		if(s[i] == '1'){
-			s[i] = '_';
-			ones++;
-		}
-	}
+	cin >> n;
+	int a = 0, g = 0;
 	string result;
-	int i = 0;
-	while (i < n){
-		if (s[i] != '2' and s[i] != '_'){
-			result.push_back('0');
-		} else if(s[i] == '2'){
-			fo(j,ones){
-				result.push_back('1');
-			}
-			while(i < n){
-				if(s[i] != '_'){
-					result.push_back(s[i]);
-				}
-				i++;
-			}
-			break;
-		}
-		i++;
-	}
-	int flag = 1;
 	fo(i, n){
-		if(s[i] == '2'){
-			flag = 0;
-			break;
-		}
-	}
-	if(flag){
-		fo(i, ones){
-			result.push_back('1');
+		int A, G;
+		cin >> A >> G;
+		if(abs(a + A - g) <= 500){	
+			a = a + A;
+			result.push_back('A');
+		} else if(abs(g + G - a) <= 500){
+			g += G;
+			result.push_back('G');
+		} else {
+			puts("-1");
+			return 0;
 		}
 	}
 	print(result);
