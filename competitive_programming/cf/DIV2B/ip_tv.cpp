@@ -86,6 +86,8 @@ int main(){
 			}
 		}
 		print(cost);
+		if(t)
+			puts("");
 	}
 }
 
