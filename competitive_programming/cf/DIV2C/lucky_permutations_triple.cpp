@@ -1,4 +1,3 @@
-
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -19,41 +18,34 @@ typedef vector<pair<double, double>> vpd;
 #define print_itrn(seq, n) fo(i, n) print(seq[i])
 #define print_itr(seq, n) fo(i, n) cout << seq[i] << " ";
 #define OJ freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
-const int N = 1000024;
-const int mod = 1073741824;
-int  m;
-ll d(int x) {
-	int limit = x;
-	int num_d = 2;
-	int i = 2;
-	for(i = 2; i < sqrt(x); i++){
-		if(x % i == 0){
-			num_d += 2;
-		}
-	}
-	if(i * i == x)
-		num_d++;
-	return num_d;
-}
+const int N = 1e5 + 24;
+const int mod = 1e9 + 7;
+int n, m;
+
 int main(){
 	#ifndef ONLINE_JUDGE	
 	OJ
 	#endif
-	ll a, b, c;
-	cin >> a >> b >> c;
-	if(a == 100 and b == 100 and c == 100){
-		print(51103588);
-		return 0;
-	}
-	ll sum = 0;
-	Fo(idx,a){
-		Fo(jdx,b){
-			Fo(kdx,c) {
-				sum += (ll)d(idx * jdx * kdx);
-			}
+	int t, q;
+	cin >> n;
+	if(n%2 == 0){
+		printf("-1\n");
+	} else {
+		vi a, b, c;
+		fo(i,n){
+			a.push_back(i);
+			b.push_back(i);
 		}
+		fo(i,n){
+			int ci = a[i] + b[i];
+			ci = ci % n;
+			c.push_back(ci);
+		}
+		print_itr(a, a.size());
+		puts("");
+		print_itr(b, b.size());
+		puts("");
+		print_itr(c, c.size());
 	}
-	print((sum - 1) % mod);
-	return 0;
 }
 

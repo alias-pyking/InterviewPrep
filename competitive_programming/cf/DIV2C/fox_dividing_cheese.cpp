@@ -1,4 +1,3 @@
-
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -19,41 +18,46 @@ typedef vector<pair<double, double>> vpd;
 #define print_itrn(seq, n) fo(i, n) print(seq[i])
 #define print_itr(seq, n) fo(i, n) cout << seq[i] << " ";
 #define OJ freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
-const int N = 1000024;
-const int mod = 1073741824;
-int  m;
-ll d(int x) {
-	int limit = x;
-	int num_d = 2;
-	int i = 2;
-	for(i = 2; i < sqrt(x); i++){
-		if(x % i == 0){
-			num_d += 2;
-		}
-	}
-	if(i * i == x)
-		num_d++;
-	return num_d;
-}
+const int N = 1e5 + 24;
+const int mod = 1e9 + 7;
 int main(){
 	#ifndef ONLINE_JUDGE	
 	OJ
 	#endif
-	ll a, b, c;
-	cin >> a >> b >> c;
-	if(a == 100 and b == 100 and c == 100){
-		print(51103588);
-		return 0;
+	int t, q;
+	int a, b;
+	cin >> a >> b;
+	int a2 = 0, a3 = 0, a5 = 0;
+	int b2 = 0, b3 = 0, b5 = 0;
+	while(a and a % 2 == 0){
+		a2++;
+		a /= 2;
 	}
-	ll sum = 0;
-	Fo(idx,a){
-		Fo(jdx,b){
-			Fo(kdx,c) {
-				sum += (ll)d(idx * jdx * kdx);
-			}
-		}
+	while(a and a %3 == 0){
+		a3++;
+		a /= 3;
 	}
-	print((sum - 1) % mod);
-	return 0;
+	while(a and a%5 == 0){
+		a5++;
+		a /= 5;
+	}
+	while(b and b % 2 == 0){
+		b2++;
+		b /= 2;
+	}
+	while(b and b % 3 == 0){
+		b3++;
+		b /= 3;
+	}
+	while(b and b % 5 == 0){
+		b5++;
+		b /= 5;
+	}
+	if(a == b){
+		cout << abs(a2 - b2) + abs(a3 - b3) + abs(a5 - b5) << '\n';
+	} else {
+		cout << -1;
+	}
+
 }
 
