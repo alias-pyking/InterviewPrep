@@ -18,14 +18,40 @@ typedef vector<pair<double, double>> vpd;
 #define print_itrn(seq, n) fo(i, n) print(seq[i])
 #define print_itr(seq, n) fo(i, n) cout << seq[i] << " ";
 #define OJ freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
-const int N = 1e5 + 24;
+const int N = 2e7 + 1;
 const int mod = 1e9 + 7;
 int n;
-int main(){
-	#ifndef ONLINE_JUDGE
-	OJ
-	#endif
-	int m;
-	cin >> n >> m;
+vector<bool> is_prime(N,true);
+vector<int> twin_primes(N + 5);
+void sieve_of_eratosthenes(){
+    is_prime[0] = is_prime[1] = false;
+    for(int i = 2; i * i < N; i++){
+        if(is_prime[i]) {
+            for(int j = i * i; j < N; j += i){
+                is_prime[j] = false;
+            }
+        }
+    }
+}
+void twin_prime(){
+    int j = 1;
+    for(int i = 3; i < N; i++){
+        if(is_prime[i] and is_prime[i + 2]){
+            twin_primes[j++] = i;
+        }
+    }
 
+}
+int main(){
+    #ifndef ONLINE_JUDGE
+    OJ
+    #endif
+    int m;
+    sieve_of_eratosthenes();
+    twin_prime();
+    while(cin >> n){
+        printf("(%d, %d)\n",twin_primes[n], twin_primes[n] + 2);
+    }
+    
+    
 }
