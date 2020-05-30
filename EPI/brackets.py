@@ -1,24 +1,21 @@
-def is_well_formed(brackets):
+def evaluateBrackets(brakets):
     stack = []
-    open = ['[','{','(']
-    for i in brackets:
-        if i in open:
-            stack.append(i)
-        else:
+    for b in brakets:
+        if b == '{' or b == '[' or b == '(':
+            stack.append(b)
+        elif b == '}' or b == ')' or b == ']':
             if len(stack) == 0:
                 return False
-            last = stack[-1]
-            if last == '[' and i == ']':
+            if stack[-1] == '[' and b == ']':
                 stack.pop()
-            elif last == '{' and i == '}':
+                continue
+            if stack[-1] == '{' and b == '}':
                 stack.pop()
-            elif last == '(' and i == ')':
+                continue
+            if stack[-1] == '(' and b == ')':
                 stack.pop()
-            else:
-                return False
+                continue    print(stack)
     return len(stack) == 0
 
-if __name__ == "__main__":
-    tests = ['([{[]}]){}[[({})]]','([]])','[{[][]}](']
-    for test in tests:
-        print(is_well_formed(test))
+print(evaluateBrackets('{}[]'))
+

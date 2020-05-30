@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "/usr/sbin/python",
+    "python.pythonPath": "C:\\Python37\\python3.exe",
     "git.ignoreLimitWarning": true,
     "files.associations": {
         "*.tcc": "cpp",
