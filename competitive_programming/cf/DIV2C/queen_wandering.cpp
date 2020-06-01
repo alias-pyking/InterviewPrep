@@ -21,7 +21,6 @@ typedef vector<pair<double, double>> vpd;
 const int N = 1e5 + 24;
 const int mod = 1e9 + 7;
 int n, m;
-char board[1001][1001];
 bool vist[1001][1001];
 int dx[8] = {0, -1, -1, -1, 0, 1, 1, 1};
 int dy[8] = {-1, -1, 0, 1, 1, 1, 0, -1};
@@ -33,23 +32,28 @@ struct node{
 		this->w = w;
 	}
 };
-int bfs(int i, int j) {
+int bfs(string board[], int i, int j, int tx, int ty) {
 	queue<node> qu;
 	qu.push(node(i, j, 0));
 	vist[i][j] = true;
-	int ans = 0;
+	for (int row = 0; row < n; row++){
+		for (int col = 0; col < m; col++){
+			if(board[row][col] == 'X'){
+				vist[row][col] = true;
+			}
+		}
+	}
+	node dest(tx, ty, 0);
 	while(!qu.empty()) {
 		node p = qu.front();
 		qu.pop();
-		if(board[p.x][p.y] == 'F'){
-			return p.w;
+		if(p.x == dest.x and p.y == dest.y){
+			return p.w -1;
 		}	
 		for (int k = 0; k < 8; k++){
 			int nx = p.x + dx[k];
 			int ny = p.y + dy[k];
 			if(nx < 0 or nx >= n or ny < 0 or ny >= m)
-				continue;
-			if(board[nx][ny] == 'X')
 				continue;
 			if(!vist[nx][ny]){
 				qu.push(node(nx, ny, 1 + p.w));
@@ -64,13 +68,27 @@ int main(){
 	scanf("%d\n", &t);
 	while(t--){
 		scanf("%d %d\n", &n, &m);
-		int x = -1, y = -1;
+		int x , y, tx, ty;
+		string board[1001];
 		memset(vist, false, sizeof(vist));
 		fo(i, n){
-			scanf("%s", &board[i]);
+			cin >> board[i];
 		}
-		// cout << x << ' ' << y << '\n';
-		int ans = bfs(x, y);
+		for(int i =0; i < n; i++){
+			for (int j = 0; j < m; j++){
+				if(board[i][j] == 'S'){
+					x = i;
+					y = j;
+				}
+				if(board[i][j] == 'F'){
+					tx = i;
+					ty = j;
+				}
+				// cout << board[i][j] << ' ';
+			}
+			// cout << '\n';
+		}
+		int ans = bfs(board,x, y, tx, ty);
 		printf("%d\n", ans);
 	}
 }
