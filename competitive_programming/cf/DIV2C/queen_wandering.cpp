@@ -21,43 +21,42 @@ typedef vector<pair<double, double>> vpd;
 const int N = 1e5 + 24;
 const int mod = 1e9 + 7;
 int n, m;
-bool vist[1001][1001];
+char grid[1005][1005];
+int dist[1005][1005];
+bool done[1005][1005];
+int s_x, s_y, t_x, t_y;
 int dx[8] = {0, -1, -1, -1, 0, 1, 1, 1};
 int dy[8] = {-1, -1, 0, 1, 1, 1, 0, -1};
-struct node{
-	int x, y, w;
-	node(int x, int y, int w){
-		this->x = x;
-		this->y = y;
-		this->w = w;
-	}
-};
-int bfs(string board[], int i, int j, int tx, int ty) {
-	queue<node> qu;
-	qu.push(node(i, j, 0));
-	vist[i][j] = true;
-	for (int row = 0; row < n; row++){
-		for (int col = 0; col < m; col++){
-			if(board[row][col] == 'X'){
-				vist[row][col] = true;
-			}
+bool is_valid(int i, int j) {
+	return (i >= 0 and i < n and j >= 0 and j < m);
+}
+int bfs() {
+	queue<pi> q;
+	q.push({s_x, s_y});
+	dist[s_x][s_y] = 0;
+	done[s_x][s_y] = 1;
+	while(!q.empty()) {
+		pi u = q.front();
+		q.pop();
+		if(u.first == t_x and u.second == t_y) {
+			return dist[t_x][t_y];
 		}
-	}
-	node dest(tx, ty, 0);
-	while(!qu.empty()) {
-		node p = qu.front();
-		qu.pop();
-		if(p.x == dest.x and p.y == dest.y){
-			return p.w -1;
-		}	
-		for (int k = 0; k < 8; k++){
-			int nx = p.x + dx[k];
-			int ny = p.y + dy[k];
-			if(nx < 0 or nx >= n or ny < 0 or ny >= m)
-				continue;
-			if(!vist[nx][ny]){
-				qu.push(node(nx, ny, 1 + p.w));
-				vist[nx][ny] = true;
+		s_x = u.first, s_y = u.second;
+		for (int i = 0; i < 8; i++){
+			int di = 1, nx, ny;
+			while(true){
+				nx = s_x + dx[i]*di;
+				ny = s_y + dy[i]*di;
+				if(!is_valid(nx,ny) or grid[nx][ny] == 'X')
+					break;
+				if(dist[nx][ny] >= dist[s_x][s_y] + 1) {
+					dist[nx][ny] = dist[s_x][s_y] + 1;
+					if(!done[nx][ny])
+						done[nx][ny] = 1, q.push({nx, ny});
+				} else {
+					break;
+				}
+				di++;
 			}
 		}
 	}
@@ -67,29 +66,22 @@ int main(){
 	int t, q;
 	scanf("%d\n", &t);
 	while(t--){
-		scanf("%d %d\n", &n, &m);
-		int x , y, tx, ty;
-		string board[1001];
-		memset(vist, false, sizeof(vist));
+		scanf("%d%d", &n, &m);
 		fo(i, n){
-			cin >> board[i];
-		}
-		for(int i =0; i < n; i++){
+			scanf("%s", grid + i);
 			for (int j = 0; j < m; j++){
-				if(board[i][j] == 'S'){
-					x = i;
-					y = j;
+				if(grid[i][j] == 'S'){
+					s_x = i, s_y = j;
 				}
-				if(board[i][j] == 'F'){
-					tx = i;
-					ty = j;
+				if(grid[i][j] == 'F'){
+					t_x = i, t_y = j;
 				}
-				// cout << board[i][j] << ' ';
+				dist[i][j] = INT_MAX;
+				done[i][j] = 0;	
 			}
-			// cout << '\n';
 		}
-		int ans = bfs(board,x, y, tx, ty);
-		printf("%d\n", ans);
+		
+		cout << bfs() << '\n';
 	}
 }
 
