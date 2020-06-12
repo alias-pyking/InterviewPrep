@@ -36,6 +36,32 @@ void sieve_of_eratosthenes(){
 ll lcm(ll a, ll b){
     return (a * b) / __gcd(a, b);
 }
+ll bigmod(ll b, ll p, ll m = mod){
+	ll res = 1;
+	while(p){
+		if(p & 1)
+			res = (res * b) % m;
+		b = (b * b) % m;
+		p >>= 1; // dividing p by 2
+	}
+	return res;
+}
+// extended Euclid's algorithm
+int extended_euclid_gcd(int a, int b, int &x, int &y){
+    if(a > b){
+        return extended_euclid_gcd(b, a, x, y);
+    }
+    if(a == 0){
+        x = 0;
+        y = 1;
+        return b;
+    }
+    int x1, y1;
+    int ans = extended_euclid_gcd(b % a, a, x1, y1);
+    x = y1 - (b / a) * x1;
+    y = x1;
+    return ans;
+}
 int main(){
     #ifndef ONLINE_JUDGE
     OJ

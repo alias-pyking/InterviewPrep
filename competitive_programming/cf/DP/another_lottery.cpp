@@ -21,33 +21,24 @@ typedef vector<pair<double, double>> vpd;
 const int N = 1e5 + 24;
 const int mod = 1e9 + 7;
 int n, m;
-int ksp(int *a, int c){
-	int dp[m + 1][c + 1];
-	fo(i, m + 1) dp[i][0] = 0;
-	fo(j, c + 1) dp[0][j] = 0;
-	for (int i = 1; i <= m; i++){
-		for (int j = 1; j <= c; j++){
-			if(a[i] <= j){
-				dp[i][j] = max(a[i] + dp[i - 1][j - a[i]], dp[i - 1][j]);
-			} else {
-				dp[i][j] = dp[i - 1][j];
-			}
-		}
-	}
-	return dp[m][c];
-}
+
 int main(){
 	int t, q;
-	cin >> n;
-	while(n--){
-		cin >> m;
-		int a[m + 1];
-		fo(i, m) cin >> a[i + 1];
-		int sum = 0;
-		Fo(i, m) sum += a[i];
-		int max_half = ksp(a, sum / 2);
-		cout << sum - 2 * max_half << '\n';
+	while(cin >> n >> m){
+		if(n == 0 and m == 0) return 0;
+
+		int a[n];
+		fo(i, n){
+			for (int j = 0; j < m; j++) cin >> a[i];
+		}
+		int total = 0;
+		print_itr(a, n);
+		fo(i, n) total += a[i];
+		cout << '\n';
+		fo(i,n){
+			int num = a[i];
+			cout << num / __gcd(num, total) << " / " << total / __gcd(num, total) << '\n';
+		}
 	}
-	return 0;
 }
 

@@ -137,7 +137,7 @@ int main(){
 			int v = u + dice + board[u + dice];
 			g.addEdge(u, v, false);
 		}
-	}
+	
 	g.bfs(0, 36);
 	g.dfs(0);
 }

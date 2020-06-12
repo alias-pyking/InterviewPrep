@@ -21,7 +21,6 @@ typedef vector<pair<double, double>> vpd;
 const int N = 1e5 + 24;
 const int mod = 1e9 + 7;
 ll n, m;
-// Integer factorization techniques
 vl sieve_of_eratosthenes(ll n){
 	vl primes;
 	vector<bool> is_prime(n,true);
@@ -36,6 +35,7 @@ vl sieve_of_eratosthenes(ll n){
     }
 	return primes;
 }
+// Integer factorization techniques
 vl trial_division1(ll n){
 	vl factorization;
 	for (ll d = 2; d * d <= n; d++){

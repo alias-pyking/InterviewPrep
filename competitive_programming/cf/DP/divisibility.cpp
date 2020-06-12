@@ -18,36 +18,33 @@ typedef vector<pair<double, double>> vpd;
 #define print_itrn(seq, n) fo(i, n) print(seq[i])
 #define print_itr(seq, n) fo(i, n) cout << seq[i] << " ";
 #define OJ freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
-const int N = 1e5 + 24;
+const int N = 1e4 + 24;
 const int mod = 1e9 + 7;
-int n, m;
-int ksp(int *a, int c){
-	int dp[m + 1][c + 1];
-	fo(i, m + 1) dp[i][0] = 0;
-	fo(j, c + 1) dp[0][j] = 0;
-	for (int i = 1; i <= m; i++){
-		for (int j = 1; j <= c; j++){
-			if(a[i] <= j){
-				dp[i][j] = max(a[i] + dp[i - 1][j - a[i]], dp[i - 1][j]);
-			} else {
-				dp[i][j] = dp[i - 1][j];
-			}
-		}
+int n, k, a[N];
+int dp[N][124];
+bool f(int i, int result_value){
+	if(i == n){
+		return result_value % k == 0 ? true : false;
 	}
-	return dp[m][c];
-}
+	if(dp[i][result_value] != -1) return dp[i][result_value];
+	int t1, t2;
+	t1 = f(i + 1, ((result_value + a[i])%k + k) % k);
+	t2 = f(i + 1, ((result_value - a[i])%k + k) % k);
+	return dp[i][result_value] = t1 or t2;
+}	
 int main(){
 	int t, q;
-	cin >> n;
-	while(n--){
-		cin >> m;
-		int a[m + 1];
-		fo(i, m) cin >> a[i + 1];
-		int sum = 0;
-		Fo(i, m) sum += a[i];
-		int max_half = ksp(a, sum / 2);
-		cout << sum - 2 * max_half << '\n';
+	// OJ
+	cin >> t;
+	while(t--){
+		memset(dp, -1, sizeof(dp));
+		cin >> n >> k;
+		fo(i, n) cin >> a[i];
+		if(f(0,0)){
+			cout << "Divisible\n";
+		} else {
+			cout << "Not divisible\n";
+		}
 	}
-	return 0;
 }
 
