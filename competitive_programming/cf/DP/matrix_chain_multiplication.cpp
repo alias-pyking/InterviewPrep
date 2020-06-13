@@ -21,6 +21,7 @@ typedef vector<pair<double, double>> vpd;
 const int N = 1e5 + 24;
 const int mod = 1e9 + 7;
 int n, m, dp[100][100];
+int optimal_sequence[100][100] ={};
 struct dim{
 	int r, c;
 	dim(){}
@@ -29,39 +30,58 @@ struct dim{
 		this->c = c;
 	}
 };
-int matrix_chain(int i, int j, vector<dim> mats){
-	if(i == j) return dp[i][j] = 0;
-	if(dp[i][j] != -1) return dp[i][j];
-	int min_cost = INT_MAX;
-	for (int k = i; k < j; k++){
-		int cost = matrix_chain(i, k,mats) + matrix_chain(k + 1, j,mats) + mats[i].r * mats[k].c * mats[j].c;
-		min_cost = min(min_cost, cost);
+
+void backtrack(int i, int j){
+	if(i < j){
+		int m = optimal_sequence[i][j];
+		printf("(");
+		backtrack(i, m);
+		printf(" x ");
+		backtrack(m + 1, j);
+		printf(")");
 	}
-	return dp[i][j] =  min_cost;
+	if(i == j){
+		printf("A%d", i + 1);
+	}
 }
-int matrix_chain_itr(vector<dim> mats){
+
+
+void matrix_chain_itr(vector<dim> mats){
 	int cache[n][n];
+	
+	fo(i, n) fill(cache[i], cache[i] + n, -1);
 	fo(i, n) cache[i][i] = 0;
-	for (int l = 1; l < n; l++){
-		for (int i = 0; i <= n; i++){
+	for (int l = 2; l <= n; l++){
+		for (int i = 0; i <= n - l; i++){
 			int j = i + l - 1;
-			dp[i][j] = INT_MAX;
+			cache[i][j] = INT_MAX;
 			for (int k = i; k < j; k++){
-				dp[i][j] = min(dp[i][j], dp[i][k] + dp[k + 1][j] + mats[i].r * mats[k].c * mats[j].c);
+				int cost = cache[i][k] + cache[k + 1][j] + mats[i].r * mats[k].c * mats[j].c;
+				if(cost < cache[i][j]){
+					cache[i][j] = cost;
+					optimal_sequence[i][j] = k;
+				}
 			}
 		}
 	}
+	backtrack(0, n - 1);
 }
 int main(){
 	int t, q;
-	cin >> n;
-	vector<dim> mats;
-	memset(dp, -1, sizeof(dp));
-	fo(i, n){
-		int r, c;
-		cin >> r >> c;
-		mats.push_back(dim(r, c));
+	t = 1;
+	while(1){
+		cin >> n;
+		if(!n) break;
+		vector<dim> mats;
+		memset(dp, -1, sizeof(dp));
+		fo(i, n){
+			int r, c;
+			cin >> r >> c;
+			mats.push_back(dim(r, c));
+		}
+		printf("Case %d: ", t++);
+		matrix_chain_itr(mats);
+		puts("");
 	}
-	cout << matrix_chain(0, n - 1, mats);
 }
 
