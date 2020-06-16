@@ -46,6 +46,16 @@ ll bigmod(ll b, ll p, ll m = mod){
 	}
 	return res;
 }
+ll bigpow(ll b, ll p){
+	ll res = 1;
+	while(p){
+		if(p & 1)
+			res = (res * b);
+		b = (b * b);
+		p >>= 1; // dividing p by 2
+	}
+	return res;
+}
 // extended Euclid's algorithm
 int extended_euclid_gcd(int a, int b, int &x, int &y){
     if(a > b){

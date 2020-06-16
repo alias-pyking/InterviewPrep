@@ -19,23 +19,24 @@ typedef vector<pair<double, double>> vpd;
 #define print_itr(seq, n) fo(i, n) cout << seq[i] << " ";
 #define OJ freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
 const int N = 1e5 + 24;
-const int g = 34943;
+const int mod = 1e9 + 7;
 int n, m;
-
+int singleNumber(const vector<int> &A) {
+	int x = 1, result = 0;
+	for (int j = 0; j < 32; j++){
+		x <<= j;
+		int sum = 0;
+		for(auto a: A){
+			sum += x & a;
+		}
+		if(sum % 3) {
+			result |= x;
+		}
+	}
+	return result;
+}
 int main(){
 	int t, q;
 	cin >> n;
-	string m;
-	while(getline(cin, m), m != "#"){
-		unsigned long message = 0;
-		for (int i = 0; i < m.length(); i++){
-			message <<= 8;
-			message += m[i];
-			message %= g;
-		}
-		message <<= 16;
-		message %= g;
-		int crc = (g - message) % g;
-	}
 }
 

@@ -19,23 +19,39 @@ typedef vector<pair<double, double>> vpd;
 #define print_itr(seq, n) fo(i, n) cout << seq[i] << " ";
 #define OJ freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
 const int N = 1e5 + 24;
-const int g = 34943;
+const int mod = 1e9 + 7;
 int n, m;
+int compareVersion(string A, string B) {
+	string a, b;
+	int i = 0;
+	for ( i = 0; i < A.length(); i++){
+		if(A[i] != '0') break;
+	}
+	while(i < A.length()){ 
+		if(i == A.length() - 1 and A[i - 1] == '.' and A[i] == '0')
+			break;
+		if (A[i] != '.') {
+			a.push_back(A[i]);
+		}
+		i++;
+	}
+	for (i = 0; i < B.length(); i++){
+		if(B[i] != '0') break;
+	}
+	while(i < B.length()){
+		if(i == B.length() - 1 and B[i - 1] == '.' and B[i] == '0')
+			break;
+		if(B[i] != '.') b.push_back(B[i]);
+		i++;
+	}
+	// cout << a << ' ' << b << '\n';
+	if(a > b or a.length() > b.length()) return 1;
+	if(b  > a or b.length() > a.length()) return -1;
+	return 0;
+}
 
 int main(){
 	int t, q;
-	cin >> n;
-	string m;
-	while(getline(cin, m), m != "#"){
-		unsigned long message = 0;
-		for (int i = 0; i < m.length(); i++){
-			message <<= 8;
-			message += m[i];
-			message %= g;
-		}
-		message <<= 16;
-		message %= g;
-		int crc = (g - message) % g;
-	}
+	cout << compareVersion("4444371174137455", "5.168");
 }
 

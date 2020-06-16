@@ -19,23 +19,23 @@ typedef vector<pair<double, double>> vpd;
 #define print_itr(seq, n) fo(i, n) cout << seq[i] << " ";
 #define OJ freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
 const int N = 1e5 + 24;
-const int g = 34943;
+const int mod = 1e9 + 7;
 int n, m;
-
+int solve(vi &A, vi &B, vi &C) {
+	int i = A.size() - 1, j = B.size() - 1, k = C.size() - 1;
+	int ans = INT_MAX;
+	while(i >= 0 and j >= 0 and k >= 0){
+		int cur_ans = max(A[i], max(B[j], C[j])) - min(A[i], min(B[j], C[k]));
+		ans = min(cur_ans, ans);
+		int max_here = max(A[i], max(B[j], C[k]));
+		if(A[i] == max_here) i--;
+		else if(B[j] == max_here) j--;
+		else k--;
+	}
+	return ans;
+}
 int main(){
 	int t, q;
 	cin >> n;
-	string m;
-	while(getline(cin, m), m != "#"){
-		unsigned long message = 0;
-		for (int i = 0; i < m.length(); i++){
-			message <<= 8;
-			message += m[i];
-			message %= g;
-		}
-		message <<= 16;
-		message %= g;
-		int crc = (g - message) % g;
-	}
 }
 

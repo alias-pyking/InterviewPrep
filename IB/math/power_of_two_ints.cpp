@@ -19,23 +19,30 @@ typedef vector<pair<double, double>> vpd;
 #define print_itr(seq, n) fo(i, n) cout << seq[i] << " ";
 #define OJ freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
 const int N = 1e5 + 24;
-const int g = 34943;
+const int mod = 1e9 + 7;
 int n, m;
+ll bigpow(ll b, ll p){
+	ll res = 1;
+	while(p){
+		if(p & 1)
+			res = (res * b);
+		b = (b * b);
+		p >>= 1; // dividing p by 2
+	}
+	return res;
+}
+int isPower(int A) {
+	for (int b = 1; (long long)b * b <= A; b++){
+		for (int p = 2;;p++){
+			if(pow(b, p) == A) return 1;
+			if(pow(b, p) > A) break;
+		}
+	}
+	return 0;
+}
 
 int main(){
 	int t, q;
 	cin >> n;
-	string m;
-	while(getline(cin, m), m != "#"){
-		unsigned long message = 0;
-		for (int i = 0; i < m.length(); i++){
-			message <<= 8;
-			message += m[i];
-			message %= g;
-		}
-		message <<= 16;
-		message %= g;
-		int crc = (g - message) % g;
-	}
 }
 

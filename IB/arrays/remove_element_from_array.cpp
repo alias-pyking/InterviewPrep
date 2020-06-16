@@ -19,23 +19,25 @@ typedef vector<pair<double, double>> vpd;
 #define print_itr(seq, n) fo(i, n) cout << seq[i] << " ";
 #define OJ freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
 const int N = 1e5 + 24;
-const int g = 34943;
+const int mod = 1e9 + 7;
 int n, m;
-
+int remove_element(vi &A, int B){
+	int n = A.size(), curr_idx = 0;
+	for (int i = 0; i < n; i++){
+		if(A[i] == B) continue;
+		else {
+			A[curr_idx++] = A[i];
+		}
+	}
+	return curr_idx;
+}
 int main(){
 	int t, q;
 	cin >> n;
-	string m;
-	while(getline(cin, m), m != "#"){
-		unsigned long message = 0;
-		for (int i = 0; i < m.length(); i++){
-			message <<= 8;
-			message += m[i];
-			message %= g;
-		}
-		message <<= 16;
-		message %= g;
-		int crc = (g - message) % g;
-	}
+	vector<int> A(n);
+	fo(i, n) cin >> A[i];
+	cin >> m;
+	n = remove_element(A, m);
+	print_itr(A, n);
 }
 
