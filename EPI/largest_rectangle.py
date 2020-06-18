@@ -9,5 +9,5 @@ def largest_rectangle_in_skyline(heights):
 	return max_rectangle_area
 
 if __name__ == "__main__":
-	heights = [1, 4, 2, 5, 6, 3, 2, 6, 6, 5, 2, 1, 3]
+	heights = [6, 2, 5, 4, 5, 1, 6 ]
 	print(largest_rectangle_in_skyline(heights))
