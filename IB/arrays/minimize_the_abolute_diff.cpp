@@ -25,7 +25,7 @@ int solve(vi &A, vi &B, vi &C) {
 	int i = A.size() - 1, j = B.size() - 1, k = C.size() - 1;
 	int ans = INT_MAX;
 	while(i >= 0 and j >= 0 and k >= 0){
-		int cur_ans = max(A[i], max(B[j], C[j])) - min(A[i], min(B[j], C[k]));
+		int cur_ans = max(A[i], max(B[j], C[k])) - min(A[i], min(B[j], C[k]));
 		ans = min(cur_ans, ans);
 		int max_here = max(A[i], max(B[j], C[k]));
 		if(A[i] == max_here) i--;

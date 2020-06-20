@@ -21,51 +21,28 @@ typedef vector<pair<double, double>> vpd;
 const int N = 1e5 + 24;
 const int mod = 1e9 + 7;
 int n, m;
-int number_of_painters_required(vector<int> &C, int t){
-	int n = C.size(), p = 1, total = 0;
-	for (int i = 0; i < n; i++){
-		total += C[i];
-		if(total > t){
-			total = C[i];
-			p++;
+vector<int> Solution::nextGreater(vector<int> &A) {
+	stack<int> stk;
+	int i = A.size() - 1;
+	vector<int> res(A.size());
+	while(i >= 0){
+		if(stk.empty()){
+			res[i] = -1;
+			stk.push(A[i]);
+			i--;
+		} else if(stk.top() > A[i]){
+			res[i] = stk.top();
+			stk.push(A[i]);
+			i--;
+		} else{
+			stk.pop();
 		}
 	}
-	return p;
-}
-ll sum_of_boards(vector<int> &C){
-	int n = C.size();
-	ll sum = 0;
-	for(int a: C){
-		sum += (ll)a;
-	}
-	return sum;
-}
-int paint(int A, int T, vector<int> &C) {
-	const int mod = 10000003;
-	ll low = *max_element(C.begin(), C.end());
-	ll high = sum_of_boards(C), n = C.size(), ans = -1;
-	while(low <= high){
-		ll mid = low + (high - low) / 2;
-		if(number_of_painters_required(C, mid) <= A){
-			ans = mid;
-			high = mid - 1;
-		} else {
-			low = mid + 1	;
-		}
-	}
-	return ((T % mod) * (ans % mod)) % mod;
+	return res;
 }
 
 int main(){
 	int t, q;
-	int A, B;
-	vector<int> C;
-	cin >> A >> B >> n;
-	fo(i, n){
-		int s;
-		cin >> s;
-		C.push_back(s);
-	}
-	cout << paint(A, B, C);
+	cin >> n;
 }
 

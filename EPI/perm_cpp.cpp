@@ -16,7 +16,7 @@ unordered_set<string> permutations(string str){
 		for(int i = 0; i <= s.length(); i++){
             string prefix = s.substr(0,i);
             string sufix = s.substr(i);
-			// cout << "Perfix " << prefix << "\n";
+        // cout << "Perfix " << prefix << "\n";
 			// cout << "suffix " << sufix << "\n";
 			string res = prefix + firstChar + sufix;
 			// cout << res << "\n";

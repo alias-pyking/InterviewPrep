@@ -21,51 +21,24 @@ typedef vector<pair<double, double>> vpd;
 const int N = 1e5 + 24;
 const int mod = 1e9 + 7;
 int n, m;
-int number_of_painters_required(vector<int> &C, int t){
-	int n = C.size(), p = 1, total = 0;
-	for (int i = 0; i < n; i++){
-		total += C[i];
-		if(total > t){
-			total = C[i];
-			p++;
-		}
-	}
-	return p;
-}
-ll sum_of_boards(vector<int> &C){
-	int n = C.size();
-	ll sum = 0;
-	for(int a: C){
-		sum += (ll)a;
-	}
-	return sum;
-}
-int paint(int A, int T, vector<int> &C) {
-	const int mod = 10000003;
-	ll low = *max_element(C.begin(), C.end());
-	ll high = sum_of_boards(C), n = C.size(), ans = -1;
-	while(low <= high){
-		ll mid = low + (high - low) / 2;
-		if(number_of_painters_required(C, mid) <= A){
-			ans = mid;
-			high = mid - 1;
+int maxArea(vector<int> &A) {
+	int n = A.size(), max_area = 0;
+	int l = 0, r = n - 1;
+	while(l < r){
+		int h = max(A[l], A[r]);
+		int w = r - l;
+		max_area = max(max_area, h * w);
+		if(A[l] < A[r]){
+			l++;
 		} else {
-			low = mid + 1	;
+			r--;
 		}
 	}
-	return ((T % mod) * (ans % mod)) % mod;
+	return max_area;
 }
 
 int main(){
 	int t, q;
-	int A, B;
-	vector<int> C;
-	cin >> A >> B >> n;
-	fo(i, n){
-		int s;
-		cin >> s;
-		C.push_back(s);
-	}
-	cout << paint(A, B, C);
+	cin >> n;
 }
 
