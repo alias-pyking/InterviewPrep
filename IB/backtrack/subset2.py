@@ -14,6 +14,16 @@ class Solution:
 			res.append(sorted([A[0]] + sub_s))
 		res = list(res)
 		return res
-
+	def subsetsWithDup(self, A):
+		result = self.subsets(A)
+		result = set(map(tuple, result))
+		res = []
+		for r in result:
+			res.append(list(r))
+		res.sort()
+		return res
+	
 sol = Solution()
-print(sol.subsets([1,2,2]))
+print(sol.subsetsWithDup([1, 2, 2]))
+
+

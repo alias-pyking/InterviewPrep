@@ -6,7 +6,7 @@ def combination_sum(A, k, res, r = [], i = 0):
 		return
 	while i < len(A) and k - A[i] >= 0:
 		r.append(A[i])
-		combination_sum(A, k - A[i], res, r, i)
+		combination_sum(A, k - A[i], res, r, i + 1)
 		i += 1
 		r.pop()
 
@@ -17,12 +17,17 @@ class Solution:
     # @param B : integer
     # @return a list of list of integer
 	def combinationSum(self, A, k):
-		A = list(set(A))
 		A.sort()
 		result = []
 		current_set = []
-		combination_sum(A,k,result)
-		return result
+		combination_sum(A, k, result)
+		result = set(map(tuple, result))
+		res = []
+		for r in result:
+			res.append(list(r))
+		res.sort()
+		
+		return res
 	
 
 sol = Solution()
