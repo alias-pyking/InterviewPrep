@@ -1,3 +1,4 @@
+
 MAPPING = ('0','1','ABC','DEF','GHI','JKL','MNO','PQRS','TUV','WXYZ')
 
 def phone_mnemonics(phone_number):

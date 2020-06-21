@@ -37,7 +37,7 @@ bool is_safe(int row, int col){
 			return false;
 	}
 	return true;
-}
+}	
 void print_solution(){
 	printf("%2d     ",h++);
 	for (int c = 0; c < n; c++){
