@@ -25,7 +25,8 @@ def solve_sudoku(partial_assignment):
 				partial_assignment[i][j] = val
 					if solve_partial_soduku(i + 1, j):
 							return True
-		partial_assignment[i][j] = EMPYT_ENTRY
+				partial_assignment[i][j] = EMPYT_ENTRY
 		return False		
 	EMPYT_ENTRY = 0
 	return solve_partial_soduku(0,0)
+	
