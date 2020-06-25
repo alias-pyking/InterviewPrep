@@ -50,5 +50,7 @@ vi equal(vi &arr){
 int main(){
 	int t, q;
 	cin >> n;
+	string str = "123454";
+	str.insert(str.begin() + 5, '(');
+	cout << str;
 }
-
