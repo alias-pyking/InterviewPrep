@@ -1,21 +1,32 @@
 import collections
 class LRUCache:
     def __init__(self, capacity):
-        self._isbn_price_table = collections.OrderedDict()
+        self.key_value = collections.OrderedDict()
         self._capacity = capacity
-    def lookup(self, isbn):
-        if not isbn in self._isbn_price_table:
-            return KeyError
-        price = self._isbn_price_table.pop(isbn)
-        self._isbn_price_table[isbn] = price
-        return price
-    def insert(self, isbn, price):
-        if isbn in self._isbn_price_table:
-            price = self._isbn_price_table.pop(isbn)
-        elif self._capacity <= len(self._isbn_price_table):
-            self._isbn_price_table.popitem(last= False)
-        self._isbn_price_table[isbn] = price
-    def erase(self,isbn):
-        return self._isbn_price_table.pop(isbn,None) is not None
+    def get(self, key):
+        if not key in self.key_value:
+            return -1
+        value = self.key_value.pop(key)
+        self.key_value[key] = value
+        return value
+    def set(self, key, value):
+        if key in self.key_value:
+            value = self.key_value.pop(key)
+        elif self._capacity <= len(self.key_value):
+            self.key_value.popitem(last= False)
+        self.key_value[key] = value
+    def erase(self,key):
+        return self.key_value.pop(key,None) is not None
+
+
+cache = LRUCache(2)
+cache.set(2,1)
+cache.set(2,2)
+print(cache.get(2))
+cache.set(1, 1)
+cache.set(4, 1)
+print(cache.get(2))
+
+
 
         
