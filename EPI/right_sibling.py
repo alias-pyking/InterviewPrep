@@ -13,3 +13,10 @@ def construct_right_sibling(tree):
     while tree and tree.left:
         populate_child_next_field(tree)
         tree = tree.left
+
+class Solution:
+    # @param root, a tree node
+    # @return nothing
+    def connect(self, root):
+        construct_right_sibling(root)
+        
