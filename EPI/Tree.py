@@ -171,6 +171,14 @@ def find_successor(node):
 #               MN
 #                   MNO
 
+
+
+# Definition for a  binary tree node
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
 def buildTree(inOrder, preOrder, inStrt, inEnd, node_to_idx):
     if inStrt > inEnd:
         return None
@@ -183,10 +191,17 @@ def buildTree(inOrder, preOrder, inStrt, inEnd, node_to_idx):
     tNode.left = buildTree(inOrder,preOrder,inStrt,idx - 1,node_to_idx)
     tNode.right = buildTree(inOrder, preOrder,idx + 1, inEnd,node_to_idx)
     return tNode
-
+class Solution:
+    # @param A : list of integers
+    # @param B : list of integers
+    # @return the root node in the tree
+    def buildTree(self, A, B):
+        node_to_idx = {data,i for i, data in enumerate(A)}
+        buildTree(A,B,0,len(A) - 1,node_to_idx)
 
 inorder = ['F','B','A','E','H','C','D','I','G']
-preorder = ['H','B','F','E','A','C','D','G','I']
+preorder = ['H', 'B', 'F', 'E', 'A', 'C', 'D', 'G', 'I']
+    
 node_to_idx = {data:i for i,data in enumerate(inorder)}
 buildTree.preIndex = 0
 a = buildTree(inorder,preorder,0,8,node_to_idx)
