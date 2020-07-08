@@ -6,7 +6,7 @@ def minimum_edit_distance(A, B):
 			return a + 1
 		if cached_e[a][b] == -1:
 			if A[a] == B[b]:
-				return E(a - 1, b - 1)
+				cached_e[a][b] = E(a - 1, b - 1)
 			else:
 				substitue_last = E(a - 1, b - 1)
 				add_last = E(a - 1, b)
@@ -17,6 +17,6 @@ def minimum_edit_distance(A, B):
 	return E(len(A) - 1, len(B) - 1)
 
 if __name__ == "__main__":
-	A = "Saturday"
-	B = "Sundays"
+	A = "b"
+	B = "a"
 	print(minimum_edit_distance(A,B))

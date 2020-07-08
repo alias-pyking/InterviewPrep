@@ -17,7 +17,7 @@ print(buy_and_sell_stocks_once(B))
 
 
 def buy_and_sell_stocks_twice(A):
-    max_total_profit, min_price_so_far = 0.0, float('inf')
+    max_total_profit, min_price_so_far = 0, float('inf')
     first_buy_sell_stocks = [0] *len(A)
     for i in range(len(A)):
         max_total_profit = max(max_total_profit, A[i] - min_price_so_far)
@@ -29,6 +29,6 @@ def buy_and_sell_stocks_twice(A):
         max_total_profit = max(max_total_profit, max_price_so_far - A[i] + first_buy_sell_stocks[i - 1])
     return max_total_profit          
 
-C = [ 12, 11, 13, 9, 12, 8, 14, 13, 15]
+C = [ 2,1]
  
 print(buy_and_sell_stocks_twice(C))

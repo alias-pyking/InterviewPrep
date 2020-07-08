@@ -9,7 +9,7 @@ def kmp_search(text,substring):
         else:
             if j - 1 >= 0:
                 j = pattern[j - 1]
-            else:
+            else:       
                 j = 0
             if substring[i] == substring[j]:
                 pattern[i] = j + 1

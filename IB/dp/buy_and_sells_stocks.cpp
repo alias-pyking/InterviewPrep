@@ -20,31 +20,25 @@ typedef vector<pair<double, double>> vpd;
 #define OJ freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
 const int N = 1e5 + 24;
 const int mod = 1e9 + 7;
-int n, m;
-int lcs(string x, string y){
-	n = x.length();
-	m = y.length();
-	int dp[n + 1][m + 1];
-	fo(i, n + 1) dp[i][0] = 0;
-	fo(j, m + 1) dp[0][j] = 0;
-	for (int i = 1; i <= n; i++){
-		for (int j = 1; j <= m; j++){
-			if(x[i] == y[j]) {
-				dp[i][j] = 1 + dp[i - 1][j - 1];
-			} else {
-				dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
-			}
+int buy_and_sell(vector<int> A){
+	int maxi = A[0], mini = A[0], max_profit_so_far = 0, n = A.size();
+	for (int i = 0; i < n; i++){
+		if(A[i] < mini){
+			mini = A[i], maxi = A[i];
+		} else if(A[i] > maxi){
+			maxi = A[i];
 		}
+		max_profit_so_far = max(max_profit_so_far, maxi - mini);
 	}
-	return dp[n][m];
+	return max_profit_so_far;
 }
+
 int main(){
 	int t, q;
-	string x, y;
-	cin >> x >> y;
-	x = "_" + x;
-	y = "_" + y;
-	int res = lcs(x, y);
-	cout << res << '\n';
+	cin >> t;
+	vector<int> A(t);
+	fo(i, t) cin >> A[i];
+	cout << buy_and_sell(A) << '\n';
+	return 0;
 }
 

@@ -20,31 +20,22 @@ typedef vector<pair<double, double>> vpd;
 #define OJ freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
 const int N = 1e5 + 24;
 const int mod = 1e9 + 7;
-int n, m;
-int lcs(string x, string y){
-	n = x.length();
-	m = y.length();
-	int dp[n + 1][m + 1];
-	fo(i, n + 1) dp[i][0] = 0;
-	fo(j, m + 1) dp[0][j] = 0;
-	for (int i = 1; i <= n; i++){
-		for (int j = 1; j <= m; j++){
-			if(x[i] == y[j]) {
-				dp[i][j] = 1 + dp[i - 1][j - 1];
-			} else {
-				dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
-			}
-		}
+int buy_and_sell_stocks_twice(vector<int> &A){
+	int max_total_profit = 0, min_price_so_far = INT_MAX, n = A.size();
+	vector<int>first_buy_sell_stocks(n);
+	for (int i = 0; i < n; i++){
+		max_total_profit = max(max_total_profit, A[i] - min_price_so_far);
+		min_price_so_far = min(min_price_so_far, A[i]);
+		first_buy_sell_stocks[i] = max_total_profit;
 	}
-	return dp[n][m];
+	int max_price_so_far = INT_MIN;
+	for (int i = n - 1; i >= 0; i--){
+		max_price_so_far = max(max_price_so_far, A[i]);
+		max_total_profit = max(max_total_profit, max_price_so_far - A[i] + first_buy_sell_stocks[i - 1]);
+	}
+	return max_total_profit;
 }
 int main(){
 	int t, q;
-	string x, y;
-	cin >> x >> y;
-	x = "_" + x;
-	y = "_" + y;
-	int res = lcs(x, y);
-	cout << res << '\n';
 }
 
