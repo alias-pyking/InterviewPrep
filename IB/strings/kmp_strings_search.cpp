@@ -22,7 +22,7 @@ pair<int,int> kmp_search(string text, string substring){
 			}
 		}
 	}
-	int i = 0, j = 0;
+	i = 0, j = 0;
 	while(i < n and j < m){
 		if(text[i] == substring[j]){
 			i++, j++;
@@ -38,5 +38,8 @@ pair<int,int> kmp_search(string text, string substring){
 
 int main(){
 	int t, q;
+	string text = "HelloIamshubhamandIamsks";
+	string substring = "Iamsks";
+	auto p = kmp_search(text, substring);
+	cout << text.substr(p.first,p.second + 1) << '\n';
 }
-
