@@ -1,5 +1,6 @@
 def palindromic_decompositions(input):
 	def direct_decomposition(offset, partial_partition):
+		print(partial_partition) 
 		if offset == len(input):
 			result.append(list(partial_partition))
 			return
