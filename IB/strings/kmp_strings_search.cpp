@@ -14,7 +14,7 @@ pair<int,int> kmp_search(string text, string substring){
 			if(j - 1 >= 0) j = pattern[j - 1];
 			else j = 0;
 			if(substring[j] == substring[i]){
-				pattern[j] = j + 1;
+				pattern[i] = j + 1;
 				i++, j++;
 			} else {
 				pattern[i] = 0;

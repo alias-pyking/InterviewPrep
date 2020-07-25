@@ -4,7 +4,7 @@ def evaluateBrackets(brakets):
         if b == '{' or b == '[' or b == '(':
             stack.append(b)
         elif b == '}' or b == ')' or b == ']':
-            if len(stack) == 0:
+            if not stack:
                 return False
             if stack[-1] == '[' and b == ']':
                 stack.pop()
@@ -14,7 +14,7 @@ def evaluateBrackets(brakets):
                 continue
             if stack[-1] == '(' and b == ')':
                 stack.pop()
-                continue    print(stack)
+                continue   
     return len(stack) == 0
 
 print(evaluateBrackets('{}[]'))

@@ -14,4 +14,4 @@ def is_deadlocked(G):
 			return True
 		cur.color = GraphVertex.black
 		return False
-	return any( vertext.color == GraphVertex.white and has_cycle(vertext) for  vertex in G)
+	return any( vertex.color == GraphVertex.white and has_cycle(vertex) for  vertex in G)
