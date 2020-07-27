@@ -8,7 +8,6 @@ int func(vector<int> &A, int n,vector<int> &dp,int i = 0) {
 	int t2 = 1 + func(A, n,dp, i + 1);
 	return dp[i] = min(t1, t2);
 }
-
 int jump(vector<int> &A) {
 	// for(auto c: A) {
 	// 	cout << c <<" ";
