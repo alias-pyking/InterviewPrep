@@ -6,7 +6,7 @@ struct TreeNode {
     TreeNode *right;
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
-int answer = 0
+int answer = 0;
 int dfs(TreeNode *root){
     if(root == NULL) return 0;
     int x = dfs(root->left);

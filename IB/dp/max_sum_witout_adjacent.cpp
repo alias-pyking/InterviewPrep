@@ -11,7 +11,7 @@ int adjacent(vector<vector<int>> &A) {
 	int ans = temp[0];
 	for(int i = 1; i < n; i++){
 		c = px + temp[i];
-		cx = p
+		cx = p;
 		ans = max(ans, max(c, cx));
 		p = max(c, p);
 		px = max(cx, px);

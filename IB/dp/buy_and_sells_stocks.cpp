@@ -20,7 +20,7 @@ typedef vector<pair<double, double>> vpd;
 #define OJ freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
 const int N = 1e5 + 24;
 const int mod = 1e9 + 7;
-int buy_and_sell(vector<int> A){
+int buy_and_sell(const vector<int> A){
 	int maxi = A[0], mini = A[0], max_profit_so_far = 0, n = A.size();
 	for (int i = 0; i < n; i++){
 		if(A[i] < mini){
